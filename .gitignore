@@ -80,3 +80,19 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+.idea/
+
+.dart_tool/
+
+android/
+
+ios/
+
+.metadata
+
+analysis_options.yaml
+
+pubspec.lock
+
+test/

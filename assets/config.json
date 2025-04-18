@@ -1,0 +1,16 @@
+{
+  "app": {
+    "name": "Cooking Recipe Diary"
+  },
+  "theme": {
+    "background_color": "#E76B5B",
+    "primary_color": "#F9E5D9",
+    "accent_color": "#FFB26B",
+    "text_color": "#3B2F2F",
+    "accent_text_color": "#FFF5F0"
+  },
+  "api": {
+    "base_url": "0.0.0.0",
+    "auth_token": ""
+  }
+}
