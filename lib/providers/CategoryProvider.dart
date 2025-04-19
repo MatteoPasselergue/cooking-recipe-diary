@@ -1,26 +1,63 @@
-import 'package:cooking_recipe_diary/services/api_services.dart';
+import 'package:cooking_recipe_diary/services/ApiServices.dart';
 import 'package:flutter/material.dart';
 
 import '../models/CategoryModel.dart';
 
-class CategoryProvider with ChangeNotifier {
+class CategoryProvider extends ChangeNotifier {
   List<Category> _categories = [];
-  bool _isLoading = false;
 
   List<Category> get categories => _categories;
-  bool get isLoading => _isLoading;
 
+  // FETCH
   Future<void> fetchCategories() async {
-    _isLoading = true;
-    notifyListeners();
-
     try {
-      _categories = await ApiService.fetchCategories();
+      final data = await ApiService.get('categories');
+      _categories = data.map<Category>((item) => Category.fromJson(item)).toList();
+      notifyListeners();
     } catch (e) {
-      print('Error fetch categories: $e');
+      throw Exception('Failed to fetch categories: $e');
     }
+  }
 
-    _isLoading = false;
-    notifyListeners();
+  // ADD
+  Future<void> addCategory(Category category) async {
+    try {
+      final newCategory = await ApiService.post('categories', {
+        'name': category.name,
+        'icon_name': category.iconName,
+      });
+      _categories.add(Category.fromJson(newCategory));
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to add category: $e');
+    }
+  }
+
+  // UPDATE
+  Future<void> updateCategory(Category category) async {
+    try {
+      await ApiService.put('categories', category.id, {
+        'name': category.name,
+        'icon_name': category.iconName,
+      });
+      final index = _categories.indexWhere((c) => c.id == category.id);
+      if (index != -1) {
+        _categories[index] = category;
+        notifyListeners();
+      }
+    } catch (e) {
+      throw Exception('Failed to update category: $e');
+    }
+  }
+
+  // DELETE
+  Future<void> deleteCategory(int id) async {
+    try {
+      await ApiService.delete('categories', id);
+      _categories.removeWhere((c) => c.id == id);
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to delete category: $e');
+    }
   }
 }

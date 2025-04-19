@@ -1,8 +1,9 @@
 class Category {
   final int id;
   final String name;
+  final String iconName;
 
-  Category({
+  Category({required this.iconName,
     required this.id,
     required this.name,
   });
@@ -11,6 +12,7 @@ class Category {
     return Category(
       id: int.parse(json['id'].toString()),
       name: json['name'] ?? '',
+      iconName: json['icon_name'],
     );
   }
 
@@ -18,6 +20,7 @@ class Category {
     return {
       'id': id,
       'name': name,
+      'icon_name': name
     };
   }
 }

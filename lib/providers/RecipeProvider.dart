@@ -1,25 +1,52 @@
-import 'package:cooking_recipe_diary/models/RecipeModel.dart';
-import 'package:cooking_recipe_diary/services/api_services.dart';
 import 'package:flutter/material.dart';
+import '../models/RecipeModel.dart';
+import '../services/ApiServices.dart';
 
-class RecipeProvider with ChangeNotifier {
+class RecipeProvider extends ChangeNotifier {
   List<Recipe> _recipes = [];
-  bool _isLoading = false;
 
   List<Recipe> get recipes => _recipes;
-  bool get isLoading => _isLoading;
-
 
   Future<void> fetchRecipes() async {
-    _isLoading = true;
-    notifyListeners();
     try {
-      _recipes = await ApiService.fetchRecipes();
+      final data = await ApiService.get('recipes');
+      _recipes = data.map<Recipe>((item) => Recipe.fromJson(item)).toList();
+      notifyListeners();
     } catch (e) {
-      print('Error fetch recipes: $e');
+      throw Exception('Failed to fetch recipes: $e');
     }
+  }
 
-    _isLoading = false;
-    notifyListeners();
+  Future<void> addRecipe(Recipe recipe) async {
+    try {
+      final newRecipe = await ApiService.post('recipes', recipe.toJson());
+      _recipes.add(Recipe.fromJson(newRecipe));
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to add recipe: $e');
+    }
+  }
+
+  Future<void> updateRecipe(Recipe recipe) async {
+    try {
+      await ApiService.put('recipes', recipe.id, recipe.toJson());
+      final index = _recipes.indexWhere((r) => r.id == recipe.id);
+      if (index != -1) {
+        _recipes[index] = recipe;
+        notifyListeners();
+      }
+    } catch (e) {
+      throw Exception('Failed to update recipe: $e');
+    }
+  }
+
+  Future<void> deleteRecipe(int id) async {
+    try {
+      await ApiService.delete('recipes', id);
+      _recipes.removeWhere((r) => r.id == id);
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to delete recipe: $e');
+    }
   }
 }

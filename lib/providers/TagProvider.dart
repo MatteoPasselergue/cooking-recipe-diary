@@ -1,26 +1,56 @@
-import 'package:cooking_recipe_diary/services/api_services.dart';
 import 'package:flutter/material.dart';
-
 import '../models/TagModel.dart';
+import '../services/ApiServices.dart';
 
-class TagProvider with ChangeNotifier {
+class TagProvider extends ChangeNotifier {
   List<Tag> _tags = [];
-  bool _isLoading = false;
 
   List<Tag> get tags => _tags;
-  bool get isLoading => _isLoading;
 
   Future<void> fetchTags() async {
-    _isLoading = true;
-    notifyListeners();
-
     try {
-      _tags = await ApiService.fetchTags();
+      final data = await ApiService.get('tags');
+      _tags = data.map<Tag>((item) => Tag.fromJson(item)).toList();
+      notifyListeners();
     } catch (e) {
-      print('Error fetch tags: $e');
+      throw Exception('Failed to fetch tags: $e');
     }
+  }
 
-    _isLoading = false;
-    notifyListeners();
+  Future<void> addTag(Tag tag) async {
+    try {
+      final newTag = await ApiService.post('tags', {
+        'name': tag.name,
+      });
+      _tags.add(Tag.fromJson(newTag));
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to add tag: $e');
+    }
+  }
+
+  Future<void> updateTag(Tag tag) async {
+    try {
+      await ApiService.put('tags', tag.id, {
+        'name': tag.name,
+      });
+      final index = _tags.indexWhere((t) => t.id == tag.id);
+      if (index != -1) {
+        _tags[index] = tag;
+        notifyListeners();
+      }
+    } catch (e) {
+      throw Exception('Failed to update tag: $e');
+    }
+  }
+
+  Future<void> deleteTag(int id) async {
+    try {
+      await ApiService.delete('tags', id);
+      _tags.removeWhere((t) => t.id == id);
+      notifyListeners();
+    } catch (e) {
+      throw Exception('Failed to delete tag: $e');
+    }
   }
 }
