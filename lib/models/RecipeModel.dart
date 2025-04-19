@@ -10,6 +10,7 @@ class Recipe {
   final int categoryId;
   final List<int> tagIds;
   final int userId;
+  late String? imageUrl;
 
   Recipe({
     required this.id,
@@ -23,7 +24,9 @@ class Recipe {
     required this.categoryId,
     required this.tagIds,
     required this.userId,
-  });
+  }){
+    imageUrl = null;
+  }
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
