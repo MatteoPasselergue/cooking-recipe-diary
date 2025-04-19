@@ -66,6 +66,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
+    - assets/images/default.png
     - assets/config.json
     - assets/lang/fr_FR.json
 
