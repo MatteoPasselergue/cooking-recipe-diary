@@ -81,4 +81,16 @@ class AppTheme {
       ),
     );
   }
+
+  static final recipeCardDecoration = BoxDecoration(
+    color: AppConfig.backgroundColor,
+    borderRadius: BorderRadius.circular(16),
+  );
+
+  static final recipeTitleStyle = TextStyle(
+    fontFamily: 'Rokkitt',
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: AppConfig.textColor,
+  );
 }

@@ -1,6 +1,10 @@
 {
   "add_category": "Ajouter une catégorie",
+  "edit_category": "Modifier la catégorie",
   "cancel": "Annuler",
   "name_category": "Nom de la catégorie",
-  "add": "Ajouter"
+  "add": "Ajouter",
+  "delete": "Supprimer",
+  "edit": "Modifier",
+  "no_recipes_found": "Aucunne recette trouvée"
 }
