@@ -5,6 +5,7 @@ import 'package:cooking_recipe_diary/providers/TagProvider.dart';
 import 'package:cooking_recipe_diary/screens/HomeScreen.dart';
 import 'package:cooking_recipe_diary/services/LocalizationService.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
+import 'package:cooking_recipe_diary/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,8 +32,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: AppConfig.appName,
+      theme: AppTheme.themeData,
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
