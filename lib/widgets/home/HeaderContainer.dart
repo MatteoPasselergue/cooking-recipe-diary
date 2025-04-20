@@ -27,7 +27,6 @@ class HeaderContainer extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  PageIconButton(Icons.settings, "settings"),
                   PageIconButton(Icons.person, "user"),
                 ],
               ),

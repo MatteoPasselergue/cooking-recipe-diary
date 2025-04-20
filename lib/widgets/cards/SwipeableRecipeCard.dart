@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cooking_recipe_diary/services/ImageService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,9 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
 
     Future.microtask(() async {
       try {
-        await Provider.of<RecipeProvider>(context, listen: false).fetchRecipes();
+        await Provider
+            .of<RecipeProvider>(context, listen: false)
+            .fetchRecipes();
       } finally {
         setState(() {
           _isLoading = false;
@@ -69,9 +72,42 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
   Widget build(BuildContext context) {
     final recipeProvider = Provider.of<RecipeProvider>(context);
     final fakeRecipes = [
-      Recipe(id: 1, name: "name", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1, imageVersion: 0),
-      Recipe(id: 2, name: "name2", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1, imageVersion: 0),
-      Recipe(id: 3, name: "name3", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1, imageVersion: 0)
+      Recipe(id: 1,
+          name: "name",
+          ingredients: [],
+          steps: [],
+          prepTime: 0,
+          cookTime: 0,
+          restTime: 0,
+          servings: 0,
+          categoryId: 1,
+          tagIds: [],
+          userId: 1,
+          imageVersion: 0),
+      Recipe(id: 2,
+          name: "name2",
+          ingredients: [],
+          steps: [],
+          prepTime: 0,
+          cookTime: 0,
+          restTime: 0,
+          servings: 0,
+          categoryId: 1,
+          tagIds: [],
+          userId: 1,
+          imageVersion: 0),
+      Recipe(id: 3,
+          name: "name3",
+          ingredients: [],
+          steps: [],
+          prepTime: 0,
+          cookTime: 0,
+          restTime: 0,
+          servings: 0,
+          categoryId: 1,
+          tagIds: [],
+          userId: 1,
+          imageVersion: 0)
     ];
     final recipes = recipeProvider.recipes;
 
@@ -80,7 +116,8 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
     }
 
     if (recipes.isEmpty) {
-      return Center(child: Text(LocalizationService.translate("no_recipes_found")));
+      return Center(
+          child: Text(LocalizationService.translate("no_recipes_found")));
     }
 
     if (currentRecipe == null) {
@@ -102,8 +139,10 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
               children: [
                 Positioned.fill(
                   child: (currentRecipe!.imageVersion != 0)
-                      ? Image.network(
-                    ImageService.buildImageUrl("recipes", currentRecipe!.id, version: currentRecipe!.imageVersion),
+                      ? CachedNetworkImage(
+                    imageUrl: ImageService.buildImageUrl(
+                        "recipes", currentRecipe!.id,
+                        version: currentRecipe!.imageVersion),
                     fit: BoxFit.cover,
                   )
                       : Image.asset(
@@ -116,7 +155,8 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
                   left: 8,
                   right: 8,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
                       color: AppConfig.backgroundColor.withOpacity(0.6),
                       borderRadius: BorderRadius.circular(8),

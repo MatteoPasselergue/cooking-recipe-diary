@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -120,7 +121,7 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
                             radius: size / 2,
                             backgroundColor: AppConfig.primaryColor,
                             backgroundImage: (user.imageVersion != 0)
-                                ? NetworkImage(ImageService.buildImageUrl("users", user.id, version: user.imageVersion))
+                                ? CachedNetworkImageProvider(ImageService.buildImageUrl("users", user.id, version: user.imageVersion))
                                 : null,
                             child: (user.imageVersion == 0)
                                 ? Icon(Icons.account_circle, size: size, color: AppConfig.backgroundColor)
