@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:cooking_recipe_diary/services/ImageService.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cooking_recipe_diary/models/RecipeModel.dart';
@@ -68,9 +69,9 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
   Widget build(BuildContext context) {
     final recipeProvider = Provider.of<RecipeProvider>(context);
     final fakeRecipes = [
-      Recipe(id: 1, name: "name", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1),
-      Recipe(id: 2, name: "name2", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1),
-      Recipe(id: 3, name: "name3", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1)
+      Recipe(id: 1, name: "name", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1, imageVersion: 0),
+      Recipe(id: 2, name: "name2", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1, imageVersion: 0),
+      Recipe(id: 3, name: "name3", ingredients: [], steps: [], prepTime: 0, cookTime: 0, restTime: 0, servings: 0, categoryId: 1, tagIds: [], userId: 1, imageVersion: 0)
     ];
     final recipes = recipeProvider.recipes;
 
@@ -100,9 +101,9 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
             child: Stack(
               children: [
                 Positioned.fill(
-                  child: (currentRecipe!.imageUrl != null && currentRecipe!.imageUrl!.isNotEmpty)
+                  child: (currentRecipe!.imageVersion != 0)
                       ? Image.network(
-                    currentRecipe!.imageUrl!,
+                    ImageService.buildImageUrl("recipes", currentRecipe!.id, version: currentRecipe!.imageVersion),
                     fit: BoxFit.cover,
                   )
                       : Image.asset(

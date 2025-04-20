@@ -1,8 +1,5 @@
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:flutter/material.dart';
-
-import '../../models/RecipeModel.dart';
-import '../buttons/VerticalRecipeCardButton.dart';
 import '../category/CategoryButtons.dart';
 import 'WavePainter.dart';
 
