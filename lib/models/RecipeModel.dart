@@ -10,7 +10,8 @@ class Recipe {
   final int categoryId;
   final List<int> tagIds;
   final int userId;
-  late String? imageUrl;
+  final int imageVersion;
+
 
   Recipe({
     required this.id,
@@ -24,9 +25,8 @@ class Recipe {
     required this.categoryId,
     required this.tagIds,
     required this.userId,
-  }){
-    imageUrl = null;
-  }
+    required this.imageVersion
+  });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
@@ -43,6 +43,7 @@ class Recipe {
       categoryId: json['categoryId'],
       tagIds: List<int>.from(json['tagIds']),
       userId: json['userId'],
+      imageVersion: json['imageVersion']
     );
   }
 
@@ -59,6 +60,7 @@ class Recipe {
       'categoryId': categoryId,
       'tagIds': tagIds,
       'userId': userId,
+      'imageVersion': imageVersion
     };
   }
 }

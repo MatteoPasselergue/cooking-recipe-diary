@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cooking_recipe_diary/services/ImageService.dart';
 import 'package:flutter/material.dart';
 import '../models/RecipeModel.dart';
 import '../services/ApiServices.dart';
@@ -17,19 +20,29 @@ class RecipeProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> addRecipe(Recipe recipe) async {
+  Future<void> addRecipe(Recipe recipe, {File? imageFile}) async {
     try {
-      final newRecipe = await ApiService.post('recipes', recipe.toJson());
-      _recipes.add(Recipe.fromJson(newRecipe));
+      final newRecipeData = await ApiService.post('recipes', recipe.toJson());
+      final newRecipe = Recipe.fromJson(newRecipeData);
+
+      if(recipe.imageVersion !=0 && imageFile !=null){
+        ImageService.uploadImage("recipes", newRecipe.id, imageFile);
+      }
+
+      _recipes.add(newRecipe);
       notifyListeners();
     } catch (e) {
       throw Exception('Failed to add recipe: $e');
     }
   }
 
-  Future<void> updateRecipe(Recipe recipe) async {
+  Future<void> updateRecipe(Recipe recipe, {File? imageFile}) async {
     try {
       await ApiService.put('recipes', recipe.id, recipe.toJson());
+
+      if(recipe.imageVersion !=0 && imageFile !=null){
+        ImageService.uploadImage("recipes", recipe.id, imageFile);
+      }
       final index = _recipes.indexWhere((r) => r.id == recipe.id);
       if (index != -1) {
         _recipes[index] = recipe;
