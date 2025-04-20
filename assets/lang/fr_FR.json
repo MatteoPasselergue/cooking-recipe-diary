@@ -4,7 +4,14 @@
   "cancel": "Annuler",
   "name_category": "Nom de la catégorie",
   "add": "Ajouter",
+  "confirm": "Confirmer",
   "delete": "Supprimer",
   "edit": "Modifier",
-  "no_recipes_found": "Aucunne recette trouvée"
+  "no_recipes_found": "Aucunne recette trouvée",
+
+  "choose_profile": "Choisir un profil",
+  "add_profile": "Créer son profil",
+  "username": "Pseudo",
+
+  "error_missing_username": "Le champ Pseudo doit etre complété."
 }
