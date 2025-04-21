@@ -15,10 +15,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  final languageProvider = LanguageProvider();
+  await languageProvider.setLocale('fr_FR');
+
+  await AppConfig.loadConfig();
+
   final prefs = await SharedPreferences.getInstance();
   final profileData = prefs.getString('profile');
 
-  await LocalizationService.load('fr_FR');
   await AppConfig.loadConfig();
   runApp(
     MultiProvider(
