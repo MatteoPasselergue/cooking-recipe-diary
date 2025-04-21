@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Recipe {
   final int id;
   final String name;
@@ -12,7 +14,6 @@ class Recipe {
   final int userId;
   final int imageVersion;
 
-
   Recipe({
     required this.id,
     required this.name,
@@ -25,25 +26,57 @@ class Recipe {
     required this.categoryId,
     required this.tagIds,
     required this.userId,
-    required this.imageVersion
+    required this.imageVersion,
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
+    var ingredientsJson = json['ingredients'];
+    List<Ingredient> ingredientsList = [];
+    if (ingredientsJson is String && ingredientsJson.isNotEmpty && ingredientsJson != "{}") {
+      ingredientsList = List<Ingredient>.from(jsonDecode(ingredientsJson).map((item) => Ingredient.fromJson(item)));
+    } else if (ingredientsJson is Map) {
+      ingredientsList = [];
+    } else if (ingredientsJson is List) {
+      ingredientsList = ingredientsJson.map((item) => Ingredient.fromJson(item)).toList();
+    }
+
+    var stepsJson = json['steps'];
+    List<String> stepsList = [];
+    if (stepsJson is String && stepsJson.isNotEmpty && stepsJson != "{}") {
+      stepsList = List<String>.from(jsonDecode(stepsJson));
+    } else if (stepsJson is Map) {
+      stepsList = [];
+    } else if (stepsJson is List) {
+      stepsList = List<String>.from(stepsJson);
+    }
+
+    var timeField = json['time'];
+    Map<String, dynamic> timeJson;
+    if (timeField is String && timeField.isNotEmpty && timeField != "{}") {
+      timeJson = jsonDecode(timeField);
+    } else if (timeField is Map) {
+      timeJson = timeField.cast<String, dynamic>();
+    } else {
+      timeJson = {};
+    }
+
+    int prepTime = int.tryParse(timeJson['prep']?.toString() ?? '') ?? 0;
+    int cookTime = int.tryParse(timeJson['cook']?.toString() ?? '') ?? 0;
+    int restTime = int.tryParse(timeJson['rest']?.toString() ?? '') ?? 0;
+
     return Recipe(
-      id: json['id'],
-      name: json['name'],
-      ingredients: (json['ingredients'] as List)
-          .map((item) => Ingredient.fromJson(item))
-          .toList(),
-      steps: List<String>.from(json['steps']),
-      prepTime: json['prepTime'],
-      cookTime: json['cookTime'],
-      restTime: json['restTime'],
-      servings: json['servings'],
-      categoryId: json['categoryId'],
-      tagIds: List<int>.from(json['tagIds']),
-      userId: json['userId'],
-      imageVersion: json['imageVersion']
+      id: int.tryParse(json['id'].toString()) ?? 0,
+      name: json['name'] ?? '',
+      ingredients: ingredientsList,
+      steps: stepsList,
+      prepTime: prepTime,
+      cookTime: cookTime,
+      restTime: restTime,
+      servings: int.tryParse(json['number_of_persons'].toString()) ?? 0,
+      categoryId: int.tryParse(json['CategoryId'].toString()) ?? 0,
+      tagIds: List<int>.from(json['tagIds'] ?? []),
+      userId: int.tryParse(json['UserId'].toString()) ?? 0,
+      imageVersion: int.tryParse(json['imageVersion'].toString()) ?? 0,
     );
   }
 
@@ -53,14 +86,16 @@ class Recipe {
       'name': name,
       'ingredients': ingredients.map((i) => i.toJson()).toList(),
       'steps': steps,
-      'prepTime': prepTime,
-      'cookTime': cookTime,
-      'restTime': restTime,
+      'time': {
+        'prep': prepTime,
+        'cook': cookTime,
+        'rest': restTime,
+      },
       'servings': servings,
-      'categoryId': categoryId,
+      'CategoryId': (categoryId == 0) ? null : categoryId,
       'tagIds': tagIds,
-      'userId': userId,
-      'imageVersion': imageVersion
+      'UserId': userId,
+      'imageVersion': imageVersion,
     };
   }
 }
@@ -76,8 +111,8 @@ class Ingredient {
 
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
-      quantity: json['quantity'],
-      name: json['name'],
+      quantity: json['quantity'] ?? '',
+      name: json['name'] ?? '',
     );
   }
 
