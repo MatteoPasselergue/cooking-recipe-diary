@@ -34,7 +34,7 @@ class UserProvider extends ChangeNotifier {
       final newUser = User.fromJson(newUserData);
 
       if(user.imageVersion != 0 && imageFile != null){
-        ImageService.uploadImage("users", newUser.id, imageFile);
+        await ImageService.uploadImage("users", newUser.id, imageFile);
       }
 
       _users.add(newUser);
@@ -54,7 +54,7 @@ class UserProvider extends ChangeNotifier {
         'imageVersion': user.imageVersion
       });
       if(user.imageVersion != 0 && imageFile != null){
-        ImageService.uploadImage("users", user.id, imageFile);
+        await ImageService.uploadImage("users", user.id, imageFile);
       }
       final index = _users.indexWhere((u) => u.id == user.id);
       if (index != -1) {
