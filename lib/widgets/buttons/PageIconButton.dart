@@ -1,3 +1,4 @@
+import 'package:cooking_recipe_diary/screens/ProfileScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
@@ -30,6 +31,10 @@ class PageIconButton extends StatelessWidget {
   }
 
   void _navigate(BuildContext context) {
-    Navigator.pushNamed(context, page);
+    switch(page){
+      case "profile":
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(),),);
+        break;
+    }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:cooking_recipe_diary/models/RecipeModel.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/widgets/buttons/PageIconButton.dart';
-import 'package:cooking_recipe_diary/widgets/buttons/VerticalRecipeCardButton.dart';
 import 'package:cooking_recipe_diary/widgets/cards/SwipeableRecipeCard.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +26,7 @@ class HeaderContainer extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  PageIconButton(Icons.person, "user"),
+                  PageIconButton(Icons.person, "profile"),
                 ],
               ),
             ],
