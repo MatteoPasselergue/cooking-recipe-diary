@@ -8,6 +8,7 @@ import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
 
+import '../../providers/LanguageProvider.dart';
 import '../../services/LocalizationService.dart';
 
 class SwipeableRecipeCard extends StatefulWidget {
@@ -117,7 +118,11 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
 
     if (recipes.isEmpty) {
       return Center(
-          child: Text(LocalizationService.translate("no_recipes_found")));
+          child: Consumer<LanguageProvider>(
+            builder: (context, languageProvider, child) {
+              return Text(LocalizationService.translate("no_recipes_found"));
+            },
+          ),);
     }
 
     if (currentRecipe == null) {

@@ -1,4 +1,7 @@
 {
+  "language_name": "Français",
+
+
   "add_category": "Ajouter une catégorie",
   "edit_category": "Modifier la catégorie",
   "cancel": "Annuler",
@@ -6,12 +9,23 @@
   "add": "Ajouter",
   "confirm": "Confirmer",
   "delete": "Supprimer",
+  "logout": "Se déconnecter ",
   "edit": "Modifier",
   "no_recipes_found": "Aucunne recette trouvée",
+  "lang": "Langage",
 
   "choose_profile": "Choisir un profil",
   "add_profile": "Créer son profil",
+  "edit_profile": "Modifier son profil",
+  "delete_profile": "Supprimer le profil",
   "username": "Pseudo",
+  "remove_image": "Supprimer l'image",
+
+  "confirm_logout_title": "Déconnexion du profil",
+  "confirm_logout_message": "Êtes-vous sûr de vouloir vous déconnecter ?",
+  "confirm_delete_title": "Suppression définitive du profil",
+  "confirm_delete_message": "Cette action est irréversible. Voulez-vous vraiment supprimer votre profil ?",
+
 
   "error_missing_username": "Le champ Pseudo doit etre complété."
 }
