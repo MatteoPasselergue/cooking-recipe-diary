@@ -14,6 +14,11 @@ class UserProvider extends ChangeNotifier {
   List<User> get users => _users;
   User? get profile => _profile;
 
+  Future<void> initialize() async {
+    await fetchUsers();
+    await loadProfile();
+  }
+
   Future<void> fetchUsers() async {
     try {
       final data = await ApiService.get('users');
