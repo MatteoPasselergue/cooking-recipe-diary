@@ -40,6 +40,7 @@ dependencies:
   shared_preferences: ^2.0.15
   image_picker: ^1.1.2
   cached_network_image: ^3.4.1
+  flutter_cache_manager: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,7 @@ flutter:
     - assets/images/default.png
     - assets/config.json
     - assets/lang/fr_FR.json
+    - assets/lang/en_US.json
 
   fonts:
     - family: Rokkitt
