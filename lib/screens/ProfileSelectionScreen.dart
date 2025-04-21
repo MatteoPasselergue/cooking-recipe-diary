@@ -161,8 +161,7 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
           id: 0,
           name: result["name"],
           imageVersion: (result["imagePath"] != null) ? 1 : 0
-        ), imageFile: File(result["imagePath"])
-      );
+        ), imageFile: (result["imagePath"] != null) ? File(result["imagePath"]) : null);
       Navigator.of(context).popUntil((route) => route.isFirst);
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
     }
