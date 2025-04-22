@@ -72,44 +72,6 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
   @override
   Widget build(BuildContext context) {
     final recipeProvider = Provider.of<RecipeProvider>(context);
-    final fakeRecipes = [
-      Recipe(id: 1,
-          name: "name",
-          ingredients: [],
-          steps: [],
-          prepTime: 0,
-          cookTime: 0,
-          restTime: 0,
-          servings: 0,
-          categoryId: 1,
-          tagIds: [],
-          userId: 1,
-          imageVersion: 0),
-      Recipe(id: 2,
-          name: "name2",
-          ingredients: [],
-          steps: [],
-          prepTime: 0,
-          cookTime: 0,
-          restTime: 0,
-          servings: 0,
-          categoryId: 1,
-          tagIds: [],
-          userId: 1,
-          imageVersion: 0),
-      Recipe(id: 3,
-          name: "name3",
-          ingredients: [],
-          steps: [],
-          prepTime: 0,
-          cookTime: 0,
-          restTime: 0,
-          servings: 0,
-          categoryId: 1,
-          tagIds: [],
-          userId: 1,
-          imageVersion: 0)
-    ];
     final recipes = recipeProvider.recipes;
 
     if (_isLoading) {
