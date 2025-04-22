@@ -48,7 +48,7 @@ class _EditProfilDialogState extends State<EditProfilDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppConfig.primaryColor,
-      title: Text(LocalizationService.translate("edit_profile")),
+      title: Text(LocalizationService.translate("edit_profile"), style: AppTheme.textButtonDialogStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 25),),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

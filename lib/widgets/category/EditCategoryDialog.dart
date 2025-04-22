@@ -34,7 +34,7 @@ class _EditCategoryDialog extends State<EditCategoryDialog> {
 
     return AlertDialog(
       backgroundColor: AppConfig.primaryColor,
-      title: Text(LocalizationService.translate("edit_category")),
+      title: Text(LocalizationService.translate("edit_category"), style: AppTheme.textButtonDialogStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 25),),
       content: SizedBox(
         width: double.maxFinite,
         child: SingleChildScrollView(

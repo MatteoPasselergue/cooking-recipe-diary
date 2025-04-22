@@ -23,7 +23,7 @@ class _AddCategoryDialog extends State<AddCategoryDialog> {
 
     return AlertDialog(
       backgroundColor: AppConfig.primaryColor,
-      title: Text(LocalizationService.translate("add_category")),
+      title: Text(LocalizationService.translate("add_category"), style: AppTheme.textButtonDialogStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 25),),
       content: SizedBox(
         width: double.maxFinite,
         child: SingleChildScrollView(

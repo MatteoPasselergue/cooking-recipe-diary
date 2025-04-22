@@ -36,7 +36,7 @@ class _AddProfileDialogState extends State<AddProfileDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppConfig.primaryColor,
-      title: Text(LocalizationService.translate("add_profile")),
+      title: Text(LocalizationService.translate("add_profile"), style: AppTheme.textButtonDialogStyle.copyWith(fontWeight: FontWeight.bold, fontSize: 25)),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

@@ -1,9 +1,7 @@
-import 'package:cooking_recipe_diary/screens/ProfileSelectionScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/LanguageProvider.dart';
-import '../../providers/UserProvider.dart';
 import '../../services/LocalizationService.dart';
 import '../../utils/AppConfig.dart';
 import '../dialogs/ConfirmationDialog.dart';
@@ -42,6 +40,7 @@ class _ProfileBodyContainerState extends State<ProfileBodyContainer> {
                       style: TextStyle(color: AppConfig.textColor),
                     ),
                     trailing: DropdownButton<String>(
+                      dropdownColor: AppConfig.primaryColor,
                       value: languageProvider.locale,
                       underline: SizedBox(),
                       items: languageProvider.availableLocales.map((localeMap) {
@@ -76,6 +75,7 @@ class _ProfileBodyContainerState extends State<ProfileBodyContainer> {
                         },
                       );
                       if(shouldLogout == true){
+                        Navigator.of(context).popUntil((route) => route.isFirst);
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => LogoutScreen(delete: false,)),
                         );
@@ -100,6 +100,7 @@ class _ProfileBodyContainerState extends State<ProfileBodyContainer> {
                         },
                       );
                       if (shouldDelete == true){
+                        Navigator.of(context).popUntil((route) => route.isFirst);
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => LogoutScreen(delete: true,)),
                         );

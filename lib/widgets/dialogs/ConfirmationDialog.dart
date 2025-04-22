@@ -13,7 +13,7 @@ class ConfirmationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppConfig.primaryColor,
-      title: Text(title, style: TextStyle(color: AppConfig.textColor)),
+      title: Text(title, style: TextStyle(color: AppConfig.textColor, fontWeight: FontWeight.bold, fontFamily: "Rokkitt", fontSize: 25)),
       content: Text(message, style: TextStyle(color: AppConfig.textColor)),
       actions: [
         TextButton(
