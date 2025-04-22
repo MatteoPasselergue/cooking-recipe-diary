@@ -4,6 +4,7 @@ import 'package:cooking_recipe_diary/services/ImageService.dart';
 import 'package:flutter/material.dart';
 import '../models/RecipeModel.dart';
 import '../services/ApiServices.dart';
+import '../services/LocalizationService.dart';
 
 class RecipeProvider extends ChangeNotifier {
   List<Recipe> _recipes = [];
@@ -62,4 +63,34 @@ class RecipeProvider extends ChangeNotifier {
       throw Exception('Failed to delete recipe: $e');
     }
   }
+
+  Future<Recipe> createEmptyRecipe(int userId) async {
+    try {
+      final emptyRecipe = Recipe(
+        id: 0,
+        name: LocalizationService.translate("default_recipe_title"),
+        ingredients: [],
+        steps: [],
+        prepTime: 0,
+        cookTime: 0,
+        restTime: 0,
+        servings: 0,
+        categoryId: 0,
+        tags: [],
+        userId: userId,
+        imageVersion: 0,
+      );
+
+      final newRecipeData = await ApiService.post('recipes', emptyRecipe.toJson());
+      final newRecipe = Recipe.fromJson(newRecipeData);
+
+      _recipes.add(newRecipe);
+      notifyListeners();
+
+      return newRecipe;
+    } catch (e) {
+      throw Exception('Failed to create empty recipe: $e');
+    }
+  }
+
 }

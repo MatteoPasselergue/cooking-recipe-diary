@@ -1,11 +1,9 @@
 import 'package:cooking_recipe_diary/providers/CategoryProvider.dart';
 import 'package:cooking_recipe_diary/providers/LanguageProvider.dart';
 import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
-import 'package:cooking_recipe_diary/providers/TagProvider.dart';
 import 'package:cooking_recipe_diary/providers/UserProvider.dart';
 import 'package:cooking_recipe_diary/screens/HomeScreen.dart';
 import 'package:cooking_recipe_diary/screens/ProfileSelectionScreen.dart';
-import 'package:cooking_recipe_diary/services/LocalizationService.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +27,6 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => RecipeProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
-        ChangeNotifierProvider(create: (_) => TagProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
       ],

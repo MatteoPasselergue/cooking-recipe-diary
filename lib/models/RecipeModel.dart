@@ -10,7 +10,7 @@ class Recipe {
   final int restTime;
   final int servings;
   final int categoryId;
-  final List<int> tagIds;
+  final List<String> tags;
   final int userId;
   final int imageVersion;
 
@@ -24,7 +24,7 @@ class Recipe {
     required this.restTime,
     required this.servings,
     required this.categoryId,
-    required this.tagIds,
+    required this.tags,
     required this.userId,
     required this.imageVersion,
   });
@@ -48,6 +48,16 @@ class Recipe {
       stepsList = [];
     } else if (stepsJson is List) {
       stepsList = List<String>.from(stepsJson);
+    }
+
+    var tagsJson = json['tags'];
+    List<String> tagsList = [];
+    if (tagsJson is String && tagsJson.isNotEmpty && tagsJson != "{}") {
+      tagsList = List<String>.from(jsonDecode(tagsJson));
+    } else if (tagsJson is Map) {
+      tagsList = [];
+    } else if (tagsJson is List) {
+      tagsList = List<String>.from(tagsJson);
     }
 
     var timeField = json['time'];
@@ -74,7 +84,7 @@ class Recipe {
       restTime: restTime,
       servings: int.tryParse(json['number_of_persons'].toString()) ?? 0,
       categoryId: int.tryParse(json['CategoryId'].toString()) ?? 0,
-      tagIds: List<int>.from(json['tagIds'] ?? []),
+      tags: tagsList,
       userId: int.tryParse(json['UserId'].toString()) ?? 0,
       imageVersion: int.tryParse(json['imageVersion'].toString()) ?? 0,
     );
@@ -93,7 +103,7 @@ class Recipe {
       },
       'servings': servings,
       'CategoryId': (categoryId == 0) ? null : categoryId,
-      'tagIds': tagIds,
+      'tags': tags,
       'UserId': userId,
       'imageVersion': imageVersion,
     };
