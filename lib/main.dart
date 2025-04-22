@@ -13,25 +13,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final languageProvider = LanguageProvider();
-  await languageProvider.setLocale('fr_FR');
-
   await AppConfig.loadConfig();
 
   final prefs = await SharedPreferences.getInstance();
   final profileData = prefs.getString('profile');
 
   await AppConfig.loadConfig();
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => RecipeProvider()),
-        ChangeNotifierProvider(create: (_) => CategoryProvider()),
-        ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => LanguageProvider()),
-      ],
-      child: MyApp(profileData: profileData),
-    ),
+  runApp(MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => RecipeProvider()),
+          ChangeNotifierProvider(create: (_) => CategoryProvider()),
+          ChangeNotifierProvider(create: (_) => UserProvider()),
+          ChangeNotifierProvider(create: (_) => LanguageProvider()),
+        ],
+        child: MyApp(profileData: profileData),
+      ),
   );
 }
 
@@ -42,12 +38,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: AppConfig.appName,
-      theme: AppTheme.themeData,
-      debugShowCheckedModeBanner: false,
-      home: profileData == null ? ProfileSelectionScreen() : const HomeScreen(),
-      //home: ProfileSelectionScreen(),
+    return Consumer<LanguageProvider>(
+      builder: (context, languageProvider, _) {
+        return MaterialApp(
+          key: ValueKey(languageProvider.locale),
+          title: AppConfig.appName,
+          theme: AppTheme.themeData,
+          debugShowCheckedModeBanner: false,
+          home: profileData == null ? ProfileSelectionScreen() : const HomeScreen(),
+        );
+      },
     );
   }
 }
