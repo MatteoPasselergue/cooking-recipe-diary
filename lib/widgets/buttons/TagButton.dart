@@ -5,8 +5,9 @@ import '../../utils/AppConfig.dart';
 class TagButton extends StatelessWidget {
   final String tag;
   final Function(String)? onTap;
+  final bool isSelected;
 
-  const TagButton({super.key, required this.tag, this.onTap});
+  const TagButton({super.key, required this.tag, this.onTap, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,18 @@ class TagButton extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: AppConfig.backgroundColor,
+            color: isSelected ? AppConfig.primaryColor : AppConfig.backgroundColor,
+            border: Border.all(
+              color: isSelected ? AppConfig.backgroundColor : AppConfig.primaryColor,
+              width: 1.5,
+            ),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             tag,
-            style: TextStyle(color: AppConfig.primaryColor),
+            style: TextStyle(color: isSelected ? AppConfig.backgroundColor : AppConfig.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

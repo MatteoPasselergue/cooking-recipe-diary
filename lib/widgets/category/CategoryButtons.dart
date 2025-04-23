@@ -1,4 +1,5 @@
 import 'package:cooking_recipe_diary/models/CategoryModel.dart';
+import 'package:cooking_recipe_diary/screens/CategoryScreen.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -82,7 +83,11 @@ class CategoryButton extends StatelessWidget {
           builder: (_) => EditCategoryDialog(category: category),
         );
       },
-      onTap: () {/*TODO*/},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => CategoryScreen(type: "category", category: category)),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: AppTheme.categoryButtonDecoration,
@@ -138,7 +143,9 @@ class AllCategoriesButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        /*TODO*/
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const CategoryScreen(type: "all_recipes")),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(8),
@@ -165,7 +172,9 @@ class NoCategoryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        /*TODO*/
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const CategoryScreen(type: "no_category")),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(8),
