@@ -1,3 +1,4 @@
+import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,9 +23,11 @@ class _LogoutScreenState extends State<LogoutScreen> {
 
   Future<void> logout() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
 
     if(widget.delete){
       await userProvider.deleteUser(userProvider.profile!.id);
+      await recipeProvider.removeUserFromRecipes(userProvider.profile!.id);
     }
     await userProvider.deleteProfile();
 

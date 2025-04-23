@@ -1,3 +1,4 @@
+import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -99,6 +100,9 @@ class _EditCategoryDialog extends State<EditCategoryDialog> {
         ),
         TextButton(
           onPressed: () async {
+            final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
+            await recipeProvider.removeCategoryFromRecipes(widget.category.id);
+
             await categoryProvider.deleteCategory(widget.category.id);
             Navigator.of(context).pop();
           },

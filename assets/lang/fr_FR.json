@@ -37,6 +37,9 @@
   "ingredient_quantity": "Quantité",
   "ingredient_unit": "Unité",
 
+  "confirm_delete_title_recipe": "Suppression définitive de la recette",
+  "confirm_delete_message_recipe": "Cette action est irréversible. Voulez-vous vraiment supprimer cette recette ?",
+
   "confirm_logout_title": "Déconnexion du profil",
   "confirm_logout_message": "Êtes-vous sûr de vouloir vous déconnecter ?",
   "confirm_delete_title": "Suppression définitive du profil",
