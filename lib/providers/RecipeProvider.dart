@@ -74,7 +74,7 @@ class RecipeProvider extends ChangeNotifier {
         prepTime: 0,
         cookTime: 0,
         restTime: 0,
-        servings: 0,
+        servings: 1,
         categoryId: 0,
         tags: [],
         userId: userId,

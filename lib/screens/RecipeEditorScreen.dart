@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/RecipeModel.dart';
 import 'HomeScreen.dart';
+import 'RecipeScreen.dart';
 
 class RecipeEditorScreen extends StatefulWidget {
   final Recipe recipe;
@@ -79,16 +80,17 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
     }
 
     final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
-    await recipeProvider.updateRecipe(Recipe(id: oldRecipe.id, name: name, ingredients: ingredients, steps: steps, prepTime: prepTime, cookTime: cookTime, restTime: restTime, servings: servings, categoryId: categoryId, tags: tags, userId: oldRecipe.userId, imageVersion: imageVersion), imageFile: imageFile);
+    final Recipe newRecipe = Recipe(id: oldRecipe.id, name: name, ingredients: ingredients, steps: steps, prepTime: prepTime, cookTime: cookTime, restTime: restTime, servings: servings, categoryId: categoryId, tags: tags, userId: oldRecipe.userId, imageVersion: imageVersion);
+    await recipeProvider.updateRecipe(newRecipe, imageFile: imageFile);
 
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => HomeScreen()),
           (route) => false,
     );
 
-    /*Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => RecipeScreen(recipeId: oldRecipe.id)),
-    );*/
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => RecipeScreen(recipe: newRecipe)),
+    );
 
   }
 }

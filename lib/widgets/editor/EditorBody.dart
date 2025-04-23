@@ -40,9 +40,6 @@ class EditorBodyState extends State<EditorBody> {
     List<Widget> stepsButton = [
       ...steps.asMap().entries.map((entry) => StepContainer(step: entry.value, position: entry.key + 1, onTap: _editStep,)),
     ];
-
-    //_editIngredient
-
     return Expanded(
         child: Column(
             children: [

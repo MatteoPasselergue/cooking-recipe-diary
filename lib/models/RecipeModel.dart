@@ -82,7 +82,7 @@ class Recipe {
       prepTime: prepTime,
       cookTime: cookTime,
       restTime: restTime,
-      servings: int.tryParse(json['servings'].toString()) ?? 0,
+      servings: int.tryParse(json['servings'].toString()) ?? 1,
       categoryId: int.tryParse(json['CategoryId'].toString()) ?? 0,
       tags: tagsList,
       userId: int.tryParse(json['UserId'].toString()) ?? 0,

@@ -12,6 +12,7 @@ import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
 
 import '../../providers/LanguageProvider.dart';
+import '../../screens/RecipeScreen.dart';
 import '../../services/LocalizationService.dart';
 
 class SwipeableRecipeCard extends StatefulWidget {
@@ -98,9 +99,16 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
     final categories = categoryProvider.categories;
     Category? currentCategory = categories.any((cat) => cat.id == currentRecipe!.categoryId) ? categories.firstWhere((cat) => cat.id == currentRecipe!.categoryId) : null;
     IconData? icon = (currentCategory != null) ? Utils.iconDataMap[currentCategory.iconName] : Icons.question_mark;
+    String category = (currentCategory !=null) ? currentCategory.name : LocalizationService.translate("no_category");
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        if(currentRecipe != null){
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => RecipeScreen(recipe: currentRecipe!)),
+          );
+        }
+      },
       onHorizontalDragEnd: (_) {
         changeRecipe(recipes);
       },
@@ -150,15 +158,29 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
                   top: 8,
                   right: 8,
                   child: Container(
-                    padding: const EdgeInsets.all(6),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
                     decoration: BoxDecoration(
                       color: AppConfig.backgroundColor,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      icon,
-                      size: 20,
-                      color: AppConfig.primaryColor,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          icon,
+                          size: 20,
+                          color: AppConfig.primaryColor,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          category,
+                          style: TextStyle(
+                            color: AppConfig.primaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -15,7 +15,7 @@ class StepContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: InkWell(
-        onTap: () { onTap!(step); },
+        onTap: () { if(onTap != null) onTap!(step); },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
