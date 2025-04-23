@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cooking_recipe_diary/models/CategoryModel.dart';
+import 'package:cooking_recipe_diary/providers/CategoryProvider.dart';
 import 'package:cooking_recipe_diary/services/ImageService.dart';
+import 'package:cooking_recipe_diary/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cooking_recipe_diary/models/RecipeModel.dart';
@@ -71,12 +74,12 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
 
   @override
   Widget build(BuildContext context) {
-    final recipeProvider = Provider.of<RecipeProvider>(context);
-    final recipes = recipeProvider.recipes;
-
     if (_isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
+
+    final recipeProvider = Provider.of<RecipeProvider>(context);
+    final recipes = recipeProvider.recipes;
 
     if (recipes.isEmpty) {
       return Center(
@@ -90,6 +93,11 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
     if (currentRecipe == null) {
       currentRecipe = recipes[random.nextInt(recipes.length)];
     }
+
+    final categoryProvider = Provider.of<CategoryProvider>(context);
+    final categories = categoryProvider.categories;
+    Category? currentCategory = categories.any((cat) => cat.id == currentRecipe!.categoryId) ? categories.firstWhere((cat) => cat.id == currentRecipe!.categoryId) : null;
+    IconData? icon = (currentCategory != null) ? Utils.iconDataMap[currentCategory.iconName] : Icons.question_mark;
 
     return GestureDetector(
       onTap: () {},
@@ -148,7 +156,7 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
-                      Icons.ac_unit,
+                      icon,
                       size: 20,
                       color: AppConfig.primaryColor,
                     ),
