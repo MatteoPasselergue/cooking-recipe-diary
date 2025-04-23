@@ -24,6 +24,10 @@ class AppTheme {
     return ThemeData(
       primaryColor: AppConfig.primaryColor,
       hintColor: AppConfig.accentColor,
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppConfig.textColor,
+        selectionHandleColor: AppConfig.primaryColor,
+      ),
       textTheme: TextTheme(
         displayLarge: TextStyle(
           fontFamily: 'Rokkitt',

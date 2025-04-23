@@ -27,7 +27,7 @@ class RecipeProvider extends ChangeNotifier {
       final newRecipe = Recipe.fromJson(newRecipeData);
 
       if(recipe.imageVersion !=0 && imageFile !=null){
-        ImageService.uploadImage("recipes", newRecipe.id, imageFile);
+        await ImageService.uploadImage("recipes", newRecipe.id, imageFile);
       }
 
       _recipes.add(newRecipe);
@@ -42,7 +42,7 @@ class RecipeProvider extends ChangeNotifier {
       await ApiService.put('recipes', recipe.id, recipe.toJson());
 
       if(recipe.imageVersion !=0 && imageFile !=null){
-        ImageService.uploadImage("recipes", recipe.id, imageFile);
+         await ImageService.uploadImage("recipes", recipe.id, imageFile);
       }
       final index = _recipes.indexWhere((r) => r.id == recipe.id);
       if (index != -1) {
@@ -111,6 +111,7 @@ class RecipeProvider extends ChangeNotifier {
         tags: [],
         userId: userId,
         imageVersion: 0,
+        note: ''
       );
 
       final newRecipeData = await ApiService.post('recipes', emptyRecipe.toJson());

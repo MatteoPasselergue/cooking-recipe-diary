@@ -23,11 +23,14 @@ class EditorBodyState extends State<EditorBody> {
   late List<String> steps;
   late List<Ingredient> ingredients;
 
+  late TextEditingController _noteController;
+
   @override
   void initState() {
     super.initState();
     steps = widget.recipe.steps;
     ingredients = widget.recipe.ingredients;
+    _noteController = TextEditingController(text: widget.recipe.note);
   }
 
 
@@ -56,6 +59,22 @@ class EditorBodyState extends State<EditorBody> {
                     color: AppConfig.backgroundColor,
                     child: Padding(padding: EdgeInsets.symmetric(vertical: 15, horizontal: 6), child: Column(
                       children: [
+                        Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.centerLeft,
+                            child: TextField(
+                              controller: _noteController,
+                              cursorColor: AppConfig.textColor,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                hintText: LocalizationService.translate("note"),
+                              ),
+                              maxLines: null,
+                              keyboardType: TextInputType.multiline,
+                            )
+                        ),),
                         Padding(padding: EdgeInsets.only(left: 10), child: Align(alignment: Alignment.centerLeft, child: Text(LocalizationService.translate("ingredients"), style: AppTheme.recipeTitleStyle.copyWith(fontSize: 30),))),
                         Padding(padding: EdgeInsets.all(5)),
                         Wrap(spacing: 8, runSpacing:  8,
@@ -168,7 +187,8 @@ class EditorBodyState extends State<EditorBody> {
   Map<String, dynamic> getData() {
     return {
       "ingredients": ingredients,
-      "steps": steps
+      "steps": steps,
+      "note": _noteController.text.trim()
     };
   }
 }

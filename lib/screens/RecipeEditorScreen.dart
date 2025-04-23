@@ -66,6 +66,7 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
     int restTime = headerData["rest"] ?? oldRecipe.restTime;
     int servings = headerData["servings"] ?? oldRecipe.servings;
     int categoryId = headerData["category"] ?? oldRecipe.categoryId;
+    String note = bodyData["note"] ?? oldRecipe.note;
 
     List<Ingredient> ingredients = bodyData["ingredients"] ?? oldRecipe.ingredients;
     List<String> steps = bodyData["steps"] ?? oldRecipe.steps;
@@ -79,7 +80,8 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
     }
 
     final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
-    final Recipe newRecipe = Recipe(id: oldRecipe.id, name: name, ingredients: ingredients, steps: steps, prepTime: prepTime, cookTime: cookTime, restTime: restTime, servings: servings, categoryId: categoryId, tags: tags, userId: oldRecipe.userId, imageVersion: imageVersion);
+    final Recipe newRecipe = Recipe(id: oldRecipe.id, name: name, ingredients: ingredients, steps: steps, prepTime: prepTime, cookTime: cookTime, restTime: restTime, servings: servings, categoryId: categoryId, tags: tags, userId: oldRecipe.userId, imageVersion: imageVersion, note: note);
+
     await recipeProvider.updateRecipe(newRecipe, imageFile: imageFile);
 
     Navigator.of(context).pushAndRemoveUntil(

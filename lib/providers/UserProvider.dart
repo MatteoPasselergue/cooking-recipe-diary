@@ -104,4 +104,8 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  User? getUserById(int id) {
+    return _users.where((user) => user.id == id).isNotEmpty ? _users.firstWhere((user) => user.id == id) : null;
+  }
+
 }

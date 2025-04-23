@@ -36,6 +36,7 @@
   "ingredient_name": "Ingrédient",
   "ingredient_quantity": "Quantité",
   "ingredient_unit": "Unité",
+  "note": "Écrire une note...",
 
   "confirm_delete_title_recipe": "Suppression définitive de la recette",
   "confirm_delete_message_recipe": "Cette action est irréversible. Voulez-vous vraiment supprimer cette recette ?",
@@ -49,5 +50,8 @@
 
   "default_recipe_title": "Ma nouvelle recette",
   "ingredients": "Ingrédients",
-  "steps": "Étapes"
+  "steps": "Étapes",
+
+  "created_by": "Crée par",
+  "unknown_user": "Inconnu"
 }

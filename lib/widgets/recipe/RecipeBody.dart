@@ -1,6 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cooking_recipe_diary/services/ImageService.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/RecipeModel.dart';
+import '../../providers/UserProvider.dart';
 import '../../services/LocalizationService.dart';
 import '../../utils/AppConfig.dart';
 import '../../utils/theme.dart';
@@ -16,6 +20,11 @@ class RecipeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final user = recipe.userId != 0 ? userProvider.getUserById(recipe.userId) : null;
+
+    final ImageProvider image = (user !=null) ? CachedNetworkImageProvider(ImageService.buildImageUrl("users", recipe.userId),) : AssetImage("assets/images/default.png");
+    
     List<Widget> ingredientsButton = [
       ...recipe.ingredients.map((ingredient) => IngredientContainer(ingredient: ingredient, onTap: null, defaultServings: recipe.servings, currentServings: currentServings)),
     ];
@@ -39,6 +48,7 @@ class RecipeBody extends StatelessWidget {
                     color: AppConfig.backgroundColor,
                     child: Padding(padding: EdgeInsets.symmetric(vertical: 15, horizontal: 6), child: Column(
                         children: [
+                          if(recipe.note.isNotEmpty)  Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.centerLeft, child: Text(recipe.note)),),
                           Padding(padding: EdgeInsets.only(left: 10), child: Align(alignment: Alignment.centerLeft, child: Text(LocalizationService.translate("ingredients"), style: AppTheme.recipeTitleStyle.copyWith(fontSize: 30),))),
                           Padding(padding: EdgeInsets.all(5)),
                           Wrap(spacing: 8, runSpacing:  8,
@@ -46,6 +56,20 @@ class RecipeBody extends StatelessWidget {
                           Padding(padding: EdgeInsets.all(10)),
                           Padding(padding: EdgeInsets.only(left: 10), child: Align(alignment: Alignment.centerLeft, child: Text(LocalizationService.translate("steps"), style: AppTheme.recipeTitleStyle.copyWith(fontSize: 30),))),
                           ...stepsButton,
+
+                          Padding(padding: EdgeInsets.only(top: 20, bottom: 0), child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                            Text(LocalizationService.translate("created_by"), style: TextStyle(fontStyle: FontStyle.italic),),
+                            Padding(padding: EdgeInsets.symmetric(horizontal: 2)),
+                            CircleAvatar(
+                              backgroundColor: AppConfig.backgroundColor,
+                              radius:  14, backgroundImage: (user != null && user.imageVersion != 0) ? image : null,
+                            child: ( user==null || user.imageVersion == 0) ? Icon(Icons.account_circle, color: AppConfig.primaryColor) : null,
+                            ),
+                            Padding(padding: EdgeInsets.symmetric(horizontal: 2)),
+                            (user != null) ? Text(user.name) : Text(LocalizationService.translate("unknown_user")),
+                          ],),),
                         ]),
                     ),
                   ))

@@ -3,6 +3,7 @@ import 'dart:convert';
 class Recipe {
   final int id;
   final String name;
+  final String note;
   final List<Ingredient> ingredients;
   final List<String> steps;
   final int prepTime;
@@ -17,6 +18,7 @@ class Recipe {
   Recipe({
     required this.id,
     required this.name,
+    required this.note,
     required this.ingredients,
     required this.steps,
     required this.prepTime,
@@ -87,6 +89,7 @@ class Recipe {
       tags: tagsList,
       userId: int.tryParse(json['UserId'].toString()) ?? 0,
       imageVersion: int.tryParse(json['imageVersion'].toString()) ?? 0,
+      note: json['note'] ?? ''
     );
   }
 
@@ -104,8 +107,9 @@ class Recipe {
       'servings': servings,
       'CategoryId': (categoryId == 0) ? null : categoryId,
       'tags': tags,
-      'UserId': userId,
+      'UserId': (userId == 0) ? null : userId,
       'imageVersion': imageVersion,
+      'note': note,
     };
   }
 
@@ -122,6 +126,7 @@ class Recipe {
     List<String>? tags,
     int? userId,
     int? imageVersion,
+    String? note,
   }) {
     return Recipe(
       id: id ?? this.id,
@@ -136,6 +141,7 @@ class Recipe {
       tags: tags ?? this.tags,
       userId: userId ?? this.userId,
       imageVersion: imageVersion ?? this.imageVersion,
+      note: note ?? this.note
     );
   }
 }

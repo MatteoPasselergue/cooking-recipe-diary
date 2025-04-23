@@ -35,6 +35,7 @@ class EditorHeader extends StatefulWidget {
 class _EditorHeaderState extends State<EditorHeader> {
   late TextEditingController _nameController;
   late String? imagePath;
+  late int imageVersion;
   File? _pickedImage;
   List<String> _tags = [];
   List<Category> _categories = [];
@@ -47,6 +48,8 @@ class _EditorHeaderState extends State<EditorHeader> {
 
   @override
   void initState() {
+    imageVersion = widget.recipe.imageVersion;
+
     super.initState();
     if (widget.recipe.categoryId != 0) {
       final categoryProvider = Provider.of<CategoryProvider>(context, listen: false);
@@ -87,6 +90,7 @@ class _EditorHeaderState extends State<EditorHeader> {
 
   void _deleteImage() {
     setState(() {
+      imageVersion = 0;
       _pickedImage = null;
       imagePath = null;
     });
@@ -145,7 +149,7 @@ class _EditorHeaderState extends State<EditorHeader> {
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      (_pickedImage != null) ? Image.file(_pickedImage!, fit: BoxFit.cover) : RecipeImage(id: widget.recipe.id, imageVersion: widget.recipe.imageVersion),
+                      (_pickedImage != null) ? Image.file(_pickedImage!, fit: BoxFit.cover) : RecipeImage(id: widget.recipe.id, imageVersion: imageVersion),
                       Container(color: Colors.black.withOpacity(0.2),
                         child: const Center(child: Icon(Icons.edit, color: Colors.white, size: 48,),),
                       ),
