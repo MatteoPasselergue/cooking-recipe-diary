@@ -79,6 +79,21 @@ class AppTheme {
       iconTheme: IconThemeData(
         color: AppConfig.textColor,
       ),
+      timePickerTheme: TimePickerThemeData(
+        dialTextStyle: recipeTitleStyle,
+        helpTextStyle: recipeTitleStyle.copyWith(fontSize: 26),
+        backgroundColor: AppConfig.primaryColor,
+        dialBackgroundColor: AppConfig.backgroundColor,
+        hourMinuteTextColor: AppConfig.textColor,
+        dialTextColor: AppConfig.textColor,
+        dialHandColor: AppConfig.primaryColor,
+        hourMinuteShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        hourMinuteColor: AppConfig.primaryColor,
+        cancelButtonStyle: TextButton.styleFrom(backgroundColor: AppConfig.backgroundColor, textStyle: textButtonDialogStyle, foregroundColor: AppConfig.primaryColor),
+        confirmButtonStyle: TextButton.styleFrom(backgroundColor: AppConfig.backgroundColor, textStyle: textButtonDialogStyle, foregroundColor: AppConfig.primaryColor)
+      ),
     );
   }
 

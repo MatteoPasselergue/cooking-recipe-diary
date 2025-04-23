@@ -6,6 +6,7 @@
   "edit_category": "Modifier la catégorie",
   "cancel": "Annuler",
   "name_category": "Nom de la catégorie",
+  "no_category": "Aucune catégorie",
   "add": "Ajouter",
   "confirm": "Confirmer",
   "delete": "Supprimer",
@@ -21,11 +22,28 @@
   "username": "Pseudo",
   "remove_image": "Supprimer l'image",
 
+  "edit_tag": "Modifier le tag",
+  "add_tag": "Ajouter un tag",
+  "name_tag": "Nom du tag",
+
+  "edit_step": "Modifier une étape",
+  "add_step": "Ajouter une étape",
+  "step_content": "Contenu de l'étape",
+
+  "add_ingredient": "Ajouter un ingrédient",
+  "edit_ingredient": "Modifier un ingrédient",
+  "ingredient_name": "Ingrédient",
+  "ingredient_quantity": "Quantité",
+  "ingredient_unit": "Unité",
+
   "confirm_logout_title": "Déconnexion du profil",
   "confirm_logout_message": "Êtes-vous sûr de vouloir vous déconnecter ?",
   "confirm_delete_title": "Suppression définitive du profil",
   "confirm_delete_message": "Cette action est irréversible. Voulez-vous vraiment supprimer votre profil ?",
 
+  "error_missing_username": "Le champ Pseudo doit etre complété.",
 
-  "error_missing_username": "Le champ Pseudo doit etre complété."
+  "default_recipe_title": "Ma nouvelle recette",
+  "ingredients": "Ingrédients",
+  "steps": "Étapes"
 }
