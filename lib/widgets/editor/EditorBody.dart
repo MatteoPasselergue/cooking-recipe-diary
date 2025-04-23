@@ -12,8 +12,9 @@ import '../home/WavePainter.dart';
 
 class EditorBody extends StatefulWidget {
   final Recipe recipe;
+  final Function() onChanged;
 
-  const EditorBody({super.key, required this.recipe});
+  const EditorBody({super.key, required this.recipe, required this.onChanged});
 
   @override
   State<EditorBody> createState() => EditorBodyState();
@@ -28,11 +29,16 @@ class EditorBodyState extends State<EditorBody> {
   @override
   void initState() {
     super.initState();
-    steps = widget.recipe.steps;
-    ingredients = widget.recipe.ingredients;
+    steps = List.from(widget.recipe.steps);
+    ingredients = List.from(widget.recipe.ingredients);
     _noteController = TextEditingController(text: widget.recipe.note);
   }
 
+  @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+    widget.onChanged();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +67,9 @@ class EditorBodyState extends State<EditorBody> {
                       children: [
                         Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.centerLeft,
                             child: TextField(
+                              onChanged: (value) {
+                                setState(() {});
+                                },
                               controller: _noteController,
                               cursorColor: AppConfig.textColor,
                               decoration: InputDecoration(

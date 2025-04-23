@@ -8,6 +8,8 @@ import 'package:cooking_recipe_diary/widgets/editor/EditorHeader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/RecipeModel.dart';
+import '../services/LocalizationService.dart';
+import '../widgets/dialogs/ConfirmationDialog.dart';
 import 'HomeScreen.dart';
 import 'RecipeScreen.dart';
 
@@ -22,12 +24,15 @@ class RecipeEditorScreen extends StatefulWidget {
 
 class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
   final GlobalKey<EditorBodyState> bodyKey = GlobalKey<EditorBodyState>();
+  bool _hasChanged = false;
 
   @override
   Widget build(BuildContext context) {
     final recipe = widget.recipe;
 
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: _onWillPop,
+        child:Scaffold(
       backgroundColor: AppConfig.primaryColor,
       body: SafeArea(
         child: LayoutBuilder(
@@ -42,9 +47,18 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // HEADER
-                      EditorHeader(onSendData: updateRecipe, recipe: recipe, onDelete: deleteRecipe,),
+                      EditorHeader(onSendData: updateRecipe, recipe: recipe, onDelete: deleteRecipe, onChanged: () {
+                    if (!_hasChanged) {
+                      setState(() {
+                        _hasChanged = true;
+                      });}}
+                      ),
                       //BODY
-                      EditorBody(key: bodyKey, recipe: recipe)
+                      EditorBody(key: bodyKey, recipe: recipe, onChanged: () {
+                        if (!_hasChanged) {
+                          setState(() {
+                            _hasChanged = true;
+                          });}})
                     ],
                   ),
                 ),
@@ -53,8 +67,29 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
           },
         ),
       ),
-    );
+    ));
   }
+
+  Future<bool> _onWillPop() async{
+    if (!_hasChanged) {
+      return true;
+    }
+
+    final shouldLeave = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return ConfirmationDialog(
+          title: LocalizationService.translate("confirm_no_save_modification_title"),
+          message: LocalizationService.translate("confirm_no_save_modification_message"),
+
+        );
+      },
+    );
+
+    return shouldLeave ?? false;
+
+  }
+
 
   void updateRecipe(Map<String, dynamic> headerData) async {
     final oldRecipe = widget.recipe;

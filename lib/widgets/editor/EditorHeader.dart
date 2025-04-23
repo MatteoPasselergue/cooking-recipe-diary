@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cooking_recipe_diary/models/RecipeModel.dart';
 import 'package:cooking_recipe_diary/providers/CategoryProvider.dart';
 import 'package:cooking_recipe_diary/services/LocalizationService.dart';
@@ -25,8 +24,9 @@ class EditorHeader extends StatefulWidget {
   final Recipe recipe;
   final Function(Map<String, dynamic> headerData) onSendData;
   final Function() onDelete;
+  final Function() onChanged;
 
-  const EditorHeader({super.key, required this.recipe, required this.onSendData, required this.onDelete});
+  const EditorHeader({super.key, required this.recipe, required this.onSendData, required this.onDelete, required this.onChanged});
 
   @override
   State<EditorHeader> createState() => _EditorHeaderState();
@@ -71,6 +71,12 @@ class _EditorHeaderState extends State<EditorHeader> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+    widget.onChanged();
+  }
+
+  @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
@@ -109,6 +115,7 @@ class _EditorHeaderState extends State<EditorHeader> {
             children: [
               Expanded(
                 child: TextField(
+                  onChanged: (value) {setState(() {});},
                   controller: _nameController,
                   style: AppTheme.recipeTitleStyle.copyWith(fontSize: 26),
                   maxLines: 1,

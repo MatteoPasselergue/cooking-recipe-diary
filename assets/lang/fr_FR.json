@@ -41,6 +41,9 @@
   "confirm_delete_title_recipe": "Suppression définitive de la recette",
   "confirm_delete_message_recipe": "Cette action est irréversible. Voulez-vous vraiment supprimer cette recette ?",
 
+  "confirm_no_save_modification_title": "Annuler les modifications ?",
+  "confirm_no_save_modification_message": "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter ?",
+
   "confirm_logout_title": "Déconnexion du profil",
   "confirm_logout_message": "Êtes-vous sûr de vouloir vous déconnecter ?",
   "confirm_delete_title": "Suppression définitive du profil",
