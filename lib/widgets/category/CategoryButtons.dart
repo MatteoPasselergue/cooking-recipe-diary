@@ -51,11 +51,15 @@ class _CategoryButtonsState extends State<CategoryButtons> {
         mainAxisSpacing: 20.0,
         childAspectRatio: 4,
       ),
-      itemCount: categoryProvider.categories.length + 1,
+      itemCount: categoryProvider.categories.length + 3,
       itemBuilder: (context, index) {
-        if (index < categoryProvider.categories.length && categoryProvider.categories.isNotEmpty) {
+        if (index < categoryProvider.categories.length) {
           final category = categoryProvider.categories[index];
           return CategoryButton(category);
+        } else if (index == categoryProvider.categories.length) {
+          return NoCategoryButton();
+        } else if (index == categoryProvider.categories.length + 1) {
+          return AllCategoriesButton();
         } else {
           return AddCategoryButton();
         }
@@ -125,6 +129,62 @@ class AddCategoryButton extends StatelessWidget {
     );
   }
 }
+
+
+class AllCategoriesButton extends StatelessWidget {
+  const AllCategoriesButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        /*TODO*/
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: AppTheme.categoryButtonDecoration,
+        child:  Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(padding: EdgeInsets.only(right: 2), child: Icon(Icons.book)),
+            Flexible(child: Text(LocalizationService.translate("all_categories"),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              softWrap: false,)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class NoCategoryButton extends StatelessWidget {
+  const NoCategoryButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        /*TODO*/
+      },
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: AppTheme.categoryButtonDecoration,
+        child:  Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(padding: EdgeInsets.only(right: 2), child: Icon(Icons.question_mark)),
+            Flexible(child: Text(LocalizationService.translate("no_category"),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              softWrap: false,)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 
 
