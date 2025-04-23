@@ -54,6 +54,38 @@ class RecipeProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> removeCategoryFromRecipes(int categoryId) async {
+    final recipesToUpdate = _recipes.where((recipe) => recipe.categoryId == categoryId).toList();
+
+    if(recipesToUpdate.isEmpty) return;
+
+    for (final recipe in recipesToUpdate) {
+      final updatedRecipe = recipe.copyWith(categoryId: 0);
+      final index = _recipes.indexWhere((r) => r.id == recipe.id);
+
+      if (index != -1) {
+        _recipes[index] = updatedRecipe;
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> removeUserFromRecipes(int userId) async {
+    final recipesToUpdate = _recipes.where((recipe) => recipe.userId == userId).toList();
+
+    if(recipesToUpdate.isEmpty) return;
+
+    for (final recipe in recipesToUpdate) {
+      final updatedRecipe = recipe.copyWith(userId: 0);
+      final index = _recipes.indexWhere((r) => r.id == recipe.id);
+
+      if (index != -1) {
+        _recipes[index] = updatedRecipe;
+      }
+    }
+    notifyListeners();
+  }
+
   Future<void> deleteRecipe(int id) async {
     try {
       await ApiService.delete('recipes', id);

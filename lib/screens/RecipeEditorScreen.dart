@@ -42,7 +42,7 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // HEADER
-                      EditorHeader(onSendData: updateRecipe, recipe: recipe),
+                      EditorHeader(onSendData: updateRecipe, recipe: recipe, onDelete: deleteRecipe,),
                       //BODY
                       EditorBody(key: bodyKey, recipe: recipe)
                     ],
@@ -60,7 +60,6 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
     final oldRecipe = widget.recipe;
     final bodyData = bodyKey.currentState!.getData();
 
-    print(headerData);
     String name = headerData["name"] ?? oldRecipe.name;
     int prepTime = headerData["prep"] ?? oldRecipe.prepTime;
     int cookTime = headerData["cook"] ?? oldRecipe.cookTime;
@@ -91,6 +90,14 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => RecipeScreen(recipe: newRecipe)),
     );
+  }
 
+  void deleteRecipe() async {
+    final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
+    await recipeProvider.deleteRecipe(widget.recipe.id);
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+          (route) => false,
+    );
   }
 }

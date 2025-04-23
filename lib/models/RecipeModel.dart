@@ -108,6 +108,36 @@ class Recipe {
       'imageVersion': imageVersion,
     };
   }
+
+  Recipe copyWith({
+    int? id,
+    String? name,
+    List<Ingredient>? ingredients,
+    List<String>? steps,
+    int? prepTime,
+    int? cookTime,
+    int? restTime,
+    int? servings,
+    int? categoryId,
+    List<String>? tags,
+    int? userId,
+    int? imageVersion,
+  }) {
+    return Recipe(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      ingredients: ingredients ?? this.ingredients,
+      steps: steps ?? this.steps,
+      prepTime: prepTime ?? this.prepTime,
+      cookTime: cookTime ?? this.cookTime,
+      restTime: restTime ?? this.restTime,
+      servings: servings ?? this.servings,
+      categoryId: categoryId ?? this.categoryId,
+      tags: tags ?? this.tags,
+      userId: userId ?? this.userId,
+      imageVersion: imageVersion ?? this.imageVersion,
+    );
+  }
 }
 
 class Ingredient {

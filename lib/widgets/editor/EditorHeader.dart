@@ -19,12 +19,14 @@ import 'dart:io';
 import '../../models/CategoryModel.dart';
 import '../../services/ImageService.dart';
 import '../../utils/utils.dart';
+import '../dialogs/ConfirmationDialog.dart';
 
 class EditorHeader extends StatefulWidget {
   final Recipe recipe;
   final Function(Map<String, dynamic> headerData) onSendData;
+  final Function() onDelete;
 
-  const EditorHeader({super.key, required this.recipe, required this.onSendData});
+  const EditorHeader({super.key, required this.recipe, required this.onSendData, required this.onDelete});
 
   @override
   State<EditorHeader> createState() => _EditorHeaderState();
@@ -116,7 +118,7 @@ class _EditorHeaderState extends State<EditorHeader> {
               const Padding(padding: EdgeInsets.all(8),),
               Row(
                 children: [
-                  ActionIconButton(factSize: 0.12, icon: Icons.delete, page: null, onTap: null,),
+                  ActionIconButton(factSize: 0.12, icon: Icons.delete, page: null, onTap: deleteRecipe,),
                   ActionIconButton(factSize: 0.12, icon: Icons.check, page: null, onTap: submitData),
                 ],
               ),
@@ -317,5 +319,20 @@ class _EditorHeaderState extends State<EditorHeader> {
       "servings": servings
     };
     widget.onSendData(data);
+  }
+
+  void deleteRecipe() async {
+      final shouldDelete = await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmationDialog(
+            title: LocalizationService.translate("confirm_delete_title_recipe"),
+            message: LocalizationService.translate("confirm_delete_message_recipe"),
+          );
+        },
+      );
+      if (shouldDelete == true){
+        widget.onDelete();
+      }
   }
 }
