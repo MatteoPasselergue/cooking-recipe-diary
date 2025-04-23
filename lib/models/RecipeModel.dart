@@ -82,7 +82,7 @@ class Recipe {
       prepTime: prepTime,
       cookTime: cookTime,
       restTime: restTime,
-      servings: int.tryParse(json['number_of_persons'].toString()) ?? 0,
+      servings: int.tryParse(json['servings'].toString()) ?? 0,
       categoryId: int.tryParse(json['CategoryId'].toString()) ?? 0,
       tags: tagsList,
       userId: int.tryParse(json['UserId'].toString()) ?? 0,
@@ -111,18 +111,21 @@ class Recipe {
 }
 
 class Ingredient {
-  final String quantity;
+  final double quantity;
   final String name;
+  final String unit;
 
   Ingredient({
     required this.quantity,
     required this.name,
+    required this.unit,
   });
 
   factory Ingredient.fromJson(Map<String, dynamic> json) {
     return Ingredient(
-      quantity: json['quantity'] ?? '',
+      quantity: double.tryParse(json['quantity'].toString()) ?? 0,
       name: json['name'] ?? '',
+      unit: json['unit'] ?? '',
     );
   }
 
@@ -130,6 +133,7 @@ class Ingredient {
     return {
       'quantity': quantity,
       'name': name,
+      'unit': unit
     };
   }
 }
