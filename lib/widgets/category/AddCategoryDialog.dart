@@ -15,7 +15,7 @@ class AddCategoryDialog extends StatefulWidget {
 
 class _AddCategoryDialog extends State<AddCategoryDialog> {
   final TextEditingController _nameController = TextEditingController();
-  String _selectedIconName = 'ac_unit';
+  String _selectedIconName = 'question_mark';
 
   @override
   Widget build(BuildContext context) {

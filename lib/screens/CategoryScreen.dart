@@ -67,7 +67,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         displayedRecipes = List.from(recipes);
       } else {
         displayedRecipes = recipes.where((recipe) =>
-            selectedTags.every((tag) => recipe.tags.contains(tag))).toList();
+            selectedTags.any((tag) => recipe.tags.contains(tag))).toList();
       }
     });
   }

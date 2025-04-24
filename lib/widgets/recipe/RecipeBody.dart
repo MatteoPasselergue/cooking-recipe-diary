@@ -23,7 +23,7 @@ class RecipeBody extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final user = recipe.userId != 0 ? userProvider.getUserById(recipe.userId) : null;
 
-    final ImageProvider image = (user !=null) ? CachedNetworkImageProvider(ImageService.buildImageUrl("users", recipe.userId),) : AssetImage("assets/images/default.png");
+    final ImageProvider image = (user !=null) ? CachedNetworkImageProvider(ImageService.buildImageUrl("users", recipe.userId, version: user.imageVersion),) : AssetImage("assets/images/default.png");
     
     List<Widget> ingredientsButton = [
       ...recipe.ingredients.map((ingredient) => IngredientContainer(ingredient: ingredient, onTap: null, defaultServings: recipe.servings, currentServings: currentServings)),
@@ -61,10 +61,10 @@ class RecipeBody extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                             Text(LocalizationService.translate("created_by"), style: TextStyle(fontStyle: FontStyle.italic),),
-                            Padding(padding: EdgeInsets.symmetric(horizontal: 2)),
+                            Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
                             CircleAvatar(
                               backgroundColor: AppConfig.backgroundColor,
-                              radius:  14, backgroundImage: (user != null && user.imageVersion != 0) ? image : null,
+                              radius:  18, backgroundImage: (user != null && user.imageVersion != 0) ? image : null,
                             child: ( user==null || user.imageVersion == 0) ? Icon(Icons.account_circle, color: AppConfig.primaryColor) : null,
                             ),
                             Padding(padding: EdgeInsets.symmetric(horizontal: 2)),
