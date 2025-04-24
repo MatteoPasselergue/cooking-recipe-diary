@@ -1,5 +1,6 @@
 import 'package:cooking_recipe_diary/providers/UserProvider.dart';
 import 'package:cooking_recipe_diary/screens/ProfileScreen.dart';
+import 'package:cooking_recipe_diary/screens/SearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
@@ -45,10 +46,12 @@ class ActionIconButton extends StatelessWidget {
       case "profile":
         Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(),),);
         break;
+      case "search":
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen(),),);
+        break;
       case "add":
         final userProvider = Provider.of<UserProvider>(context, listen: false);
         final newRecipe = await Provider.of<RecipeProvider>(context, listen: false).createEmptyRecipe(userProvider.profile!.id);
-        print(newRecipe.id);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => RecipeEditorScreen(recipe: newRecipe),
