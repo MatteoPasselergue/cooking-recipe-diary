@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cooking_recipe_diary/services/ImageService.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/RecipeModel.dart';
 import '../../providers/UserProvider.dart';
@@ -48,7 +50,21 @@ class RecipeBody extends StatelessWidget {
                     color: AppConfig.backgroundColor,
                     child: Padding(padding: EdgeInsets.symmetric(vertical: 15, horizontal: 6), child: Column(
                         children: [
-                          if(recipe.note.isNotEmpty)  Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.centerLeft, child: SelectableText(recipe.note)),),
+                          if(recipe.note.isNotEmpty)  Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.centerLeft,
+                            child: SelectableLinkify(
+                            text: recipe.note,
+                            onOpen: (link) async {
+                              final uri = Uri.parse(link.url);
+                              if (await canLaunchUrl(uri)) {
+                                await launchUrl(
+                                    uri, mode: LaunchMode.externalApplication);
+                              }
+                            },
+                              linkStyle: TextStyle(
+                                color: AppConfig.primaryColor,
+                                decoration: TextDecoration.none,
+                              ),
+                          )),),
                           Padding(padding: EdgeInsets.only(left: 10), child: Align(alignment: Alignment.centerLeft, child: Text(LocalizationService.translate("ingredients"), style: AppTheme.recipeTitleStyle.copyWith(fontSize: 30),))),
                           Padding(padding: EdgeInsets.all(5)),
                           Wrap(spacing: 8, runSpacing:  8,
