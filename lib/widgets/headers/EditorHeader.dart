@@ -19,6 +19,7 @@ import '../../models/CategoryModel.dart';
 import '../../services/ImageService.dart';
 import '../../utils/utils.dart';
 import '../dialogs/ConfirmationDialog.dart';
+import '../snackbar/AppSnackBar.dart';
 
 class EditorHeader extends StatefulWidget {
   final Recipe recipe;
@@ -319,17 +320,21 @@ class _EditorHeaderState extends State<EditorHeader> {
   }
 
   void submitData() {
-    final data = {
-      "name": _nameController.text.trim(),
-      "imagePath": imagePath,
-      "tags": _tags,
-      "prep": prepTime.inSeconds,
-      "cook": cookTime.inSeconds,
-      "rest": restTime.inSeconds,
-      "category": (category != null) ? category!.id : 0,
-      "servings": servings
-    };
-    widget.onSendData(data);
+    if(_nameController.text.isNotEmpty) {
+      final data = {
+        "name": _nameController.text.trim(),
+        "imagePath": imagePath,
+        "tags": _tags,
+        "prep": prepTime.inSeconds,
+        "cook": cookTime.inSeconds,
+        "rest": restTime.inSeconds,
+        "category": (category != null) ? category!.id : 0,
+        "servings": servings
+      };
+      widget.onSendData(data);
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage("recipe_name_cant_be_empty", error: false));
+    }
   }
 
   void deleteRecipe() async {

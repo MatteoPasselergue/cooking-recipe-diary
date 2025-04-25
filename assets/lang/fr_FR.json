@@ -66,6 +66,14 @@
   "created_by": "Crée par",
   "unknown_user": "Inconnu",
 
+  "total_time": "Temps total",
+  "prep_time": "Temps de préparation",
+  "rest_time": "Temps de repos",
+  "cook_time": "Temps de cuisson",
+  "servings": "Nombre de personnes/ Nombre de pièces",
+  "recipe_name_cant_be_empty": "Le nom de la recette ne peut pas être vide.",
+
+
 
   "be_patient_message": "Veuillez patienter quelques instants...",
   "importation_waiting_message": "L'importation d'une recette peut prendre jusqu'à 30 secondes.",

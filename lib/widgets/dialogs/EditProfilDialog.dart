@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
+import 'package:cooking_recipe_diary/widgets/snackbar/AppSnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../services/LocalizationService.dart';
+import '../../utils/utils.dart';
 
 class EditProfilDialog extends StatefulWidget {
   final String? currentName;
@@ -93,7 +95,7 @@ class _EditProfilDialogState extends State<EditProfilDialog> {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            Utils.closeDialog(context);
           },
           child: Text(LocalizationService.translate("cancel"), style: AppTheme.textButtonDialogStyle),
         ),
@@ -101,13 +103,12 @@ class _EditProfilDialogState extends State<EditProfilDialog> {
           onPressed: () {
             final name = _nameController.text.trim();
             if (name.isNotEmpty) {
-              Navigator.pop(context, {
+              Utils.closeDialog(context, data: {
                 'name': name,
                 'imagePath': _imagePath,
               });
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(LocalizationService.translate("error_missing_username"))),
+              ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage("error_missing_username"),
               );
             }
           },

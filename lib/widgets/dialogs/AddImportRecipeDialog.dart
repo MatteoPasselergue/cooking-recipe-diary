@@ -1,5 +1,6 @@
 import 'package:cooking_recipe_diary/services/LocalizationService.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
+import 'package:cooking_recipe_diary/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/theme.dart';
@@ -29,9 +30,9 @@ class AddImportRecipeDialog extends StatelessWidget {
               final result = await showDialog<Map<String, String>>(context: context,
                 builder: (context) => _importDialog(context)
               );
-              if(result !=null && result["url"] != null ){
-                Navigator.of(context).pop({"action": "import", "url": result["url"]});
-              }else Navigator.of(context).pop();
+              if(result !=null && result["url"] != null ) {
+                Utils.closeDialog(context, data: {"action": "import", "url": result["url"]});
+              }else Utils.closeDialog(context);
             },
             title: Text(LocalizationService.translate("import_from_url")),
           )
@@ -62,7 +63,7 @@ class AddImportRecipeDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            Utils.closeDialog(context);
           },
           child: Text(LocalizationService.translate("cancel"),
             style: AppTheme.textButtonDialogStyle,
@@ -72,7 +73,7 @@ class AddImportRecipeDialog extends StatelessWidget {
           onPressed: () {
             String url = urlController.text;
             if(url.isNotEmpty){
-              Navigator.of(context).pop({"url": url});
+              Utils.closeDialog(context, data: {"url": url});
             }
           },
           child: Text(LocalizationService.translate("confirm"),

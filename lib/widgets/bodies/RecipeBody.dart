@@ -48,7 +48,7 @@ class RecipeBody extends StatelessWidget {
                     color: AppConfig.backgroundColor,
                     child: Padding(padding: EdgeInsets.symmetric(vertical: 15, horizontal: 6), child: Column(
                         children: [
-                          if(recipe.note.isNotEmpty)  Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.centerLeft, child: Text(recipe.note)),),
+                          if(recipe.note.isNotEmpty)  Padding(padding: EdgeInsets.all(10), child: Align(alignment: Alignment.centerLeft, child: SelectableText(recipe.note)),),
                           Padding(padding: EdgeInsets.only(left: 10), child: Align(alignment: Alignment.centerLeft, child: Text(LocalizationService.translate("ingredients"), style: AppTheme.recipeTitleStyle.copyWith(fontSize: 30),))),
                           Padding(padding: EdgeInsets.all(5)),
                           Wrap(spacing: 8, runSpacing:  8,

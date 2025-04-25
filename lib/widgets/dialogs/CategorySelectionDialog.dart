@@ -4,6 +4,7 @@ import '../../models/CategoryModel.dart';
 import '../../services/LocalizationService.dart';
 import '../../utils/AppConfig.dart';
 import '../../utils/theme.dart';
+import '../../utils/utils.dart';
 
 class CategorySelectionDialog  extends StatelessWidget {
   final List<Category> categories;
@@ -33,7 +34,7 @@ class CategorySelectionDialog  extends StatelessWidget {
         ],
         onChanged: (value) {
           onSelected(value);
-          Navigator.of(context).pop();
+          Utils.closeDialog(context);
         },
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../services/LocalizationService.dart';
 import '../../utils/AppConfig.dart';
+import '../../utils/utils.dart';
 
 class ConfirmationDialog extends StatelessWidget {
   final String title;
@@ -18,13 +19,13 @@ class ConfirmationDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context, false);
+            Utils.closeDialog(context, data: false);
           },
           child: Text(LocalizationService.translate("cancel"), style: TextStyle(color: AppConfig.textColor)),
         ),
         TextButton(
           onPressed: () {
-            Navigator.pop(context, true);
+            Utils.closeDialog(context, data: true);
           },
           child: Text(LocalizationService.translate("confirm"), style: TextStyle(color: AppConfig.textColor)),
         ),

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../services/LocalizationService.dart';
 import '../../utils/theme.dart';
+import '../../utils/utils.dart';
 
 class AddEditIngredientDialog extends StatelessWidget {
   final Ingredient? ingredient;
@@ -71,13 +72,13 @@ class AddEditIngredientDialog extends StatelessWidget {
         if (ingredient != null)
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop({"action": "delete"});
+              Utils.closeDialog(context, data: {"action": "delete"});
             },
             child: Text(LocalizationService.translate("delete"),
                 style: AppTheme.textButtonDialogStyle),
           ),
         TextButton(
-          onPressed: () => Navigator.of(context).pop({"action": "cancel"}),
+          onPressed: () => Utils.closeDialog(context, data: {"action": "cancel"}),
           child: Text(LocalizationService.translate("cancel"),
               style: AppTheme.textButtonDialogStyle),
         ),
@@ -93,7 +94,7 @@ class AddEditIngredientDialog extends StatelessWidget {
               return;
             }
 
-            Navigator.of(context).pop({
+            Utils.closeDialog(context, data: {
               "action": "confirm",
               "ingredient": Ingredient(
                   name: name, quantity: quantity ?? 0, unit: unit),

@@ -1,4 +1,5 @@
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
+import 'package:cooking_recipe_diary/utils/utils.dart';
 import 'package:flutter/material.dart';
 import '../../services/LocalizationService.dart';
 import '../../utils/theme.dart';
@@ -23,20 +24,20 @@ class AddEditTagDialog extends StatelessWidget {
       actions: [
         if (tag != null)
           TextButton(
-            onPressed: () => Navigator.pop(context, {"action": "delete"}),
+            onPressed: () => Utils.closeDialog(context, data:{"action": "delete"}),
             child: Text(
               LocalizationService.translate("delete"),
               style: AppTheme.textButtonDialogStyle,
             ),
           ),
         TextButton(
-          onPressed: () => Navigator.pop(context, {"action": "cancel"}),
+          onPressed: () => Utils.closeDialog(context, data:{"action": "cancel"}),
           child: Text(LocalizationService.translate("cancel"), style: AppTheme.textButtonDialogStyle),
         ),
         TextButton(
           onPressed: () {
             final newName = controller.text.trim();
-            Navigator.pop(context, {"action": "confirm", "tag": newName});
+            Utils.closeDialog(context, data: {"action": "confirm", "tag": newName});
           },
           child: Text(LocalizationService.translate("confirm"), style: AppTheme.textButtonDialogStyle,),
         ),

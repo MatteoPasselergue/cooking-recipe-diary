@@ -82,7 +82,7 @@ class _AddCategoryDialog extends State<AddCategoryDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Utils.closeDialog(context),
           child: Text(LocalizationService.translate("cancel"), style: AppTheme.textButtonDialogStyle),
         ),
         TextButton(
@@ -100,7 +100,7 @@ class _AddCategoryDialog extends State<AddCategoryDialog> {
 
                 LoadingDialog.hideLoadingDialog(context);
 
-                Navigator.of(context).pop();
+                Utils.closeDialog(context);
               }catch(e){
                 LoadingDialog.hideLoadingDialog(context);
                 LoadingDialog.showError(context, e);

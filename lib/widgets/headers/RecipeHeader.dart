@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cooking_recipe_diary/widgets/snackbar/AppSnackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -113,11 +114,14 @@ class RecipeHeader extends StatelessWidget {
             child: Row(
               children: [
                 Padding(padding: EdgeInsets.all(6),
-                    child: BaseContainer(child: ServingsCounterContainer(defaultCounter: servings, onChanged: onServingsChanged))),
-                Padding(padding: EdgeInsets.all(6), child: BaseContainer(child: _buildDurationView(Icons.access_time, Duration(seconds: (recipe.prepTime + recipe.restTime + recipe.cookTime))))),
-                Padding(padding: EdgeInsets.all(6), child: BaseContainer(child: _buildDurationView(Icons.hourglass_full, Duration(seconds: recipe.prepTime)))),
-                Padding(padding: EdgeInsets.all(6), child: BaseContainer(child: _buildDurationView(Icons.nightlight_round, Duration(seconds: recipe.restTime)))),
-                Padding(padding: EdgeInsets.all(6), child: BaseContainer(child: _buildDurationView(Icons.microwave, Duration(seconds: recipe.cookTime)))),
+                    child: GestureDetector(
+                        child: BaseContainer(child: ServingsCounterContainer(defaultCounter: servings, onChanged: onServingsChanged),),
+                      onTap: () {ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage("servings"));},
+                    )),
+                Padding(padding: EdgeInsets.all(6), child: BaseContainer(child: _buildDurationView(context, "total_time", Icons.access_time, Duration(seconds: (recipe.prepTime + recipe.restTime + recipe.cookTime))))),
+                Padding(padding: EdgeInsets.all(6), child: BaseContainer(child: _buildDurationView(context, "prep_time",Icons.hourglass_full, Duration(seconds: recipe.prepTime)))),
+                Padding(padding: EdgeInsets.all(6), child: BaseContainer(child: _buildDurationView(context, "rest_time", Icons.nightlight_round, Duration(seconds: recipe.restTime)))),
+                Padding(padding: EdgeInsets.all(6), child: BaseContainer(child: _buildDurationView(context, "cook_time", Icons.microwave, Duration(seconds: recipe.cookTime)))),
               ],
             ),
           ),
@@ -128,14 +132,19 @@ class RecipeHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildDurationView(IconData icon, Duration duration) {
-    return Row(mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: AppConfig.primaryColor,),
-          const SizedBox(width: 4),
-          Text("${duration.inHours}h ${duration.inMinutes.remainder(60)}m", style: TextStyle(fontSize: 14, color: AppConfig.primaryColor)),
-        ],
-      );
+  Widget _buildDurationView(BuildContext context, String type,IconData icon, Duration duration) {
+    return GestureDetector(
+        onTap: () {
+          ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage(type));
+        },
+        child: Row(mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, color: AppConfig.primaryColor,),
+            const SizedBox(width: 4),
+            Text("${duration.inHours}h ${duration.inMinutes.remainder(60)}m",
+                style: TextStyle(fontSize: 14, color: AppConfig.primaryColor)),
+          ],
+        ));
   }
   
 }

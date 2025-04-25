@@ -96,7 +96,7 @@ class _EditCategoryDialog extends State<EditCategoryDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Utils.closeDialog(context),
           child: Text(LocalizationService.translate("cancel"), style: AppTheme.textButtonDialogStyle),
         ),
         TextButton(
@@ -112,7 +112,7 @@ class _EditCategoryDialog extends State<EditCategoryDialog> {
               await categoryProvider.deleteCategory(widget.category.id);
 
               LoadingDialog.hideLoadingDialog(context);
-              Navigator.of(context).pop();
+              Utils.closeDialog(context);
             }catch(e){
               LoadingDialog.hideLoadingDialog(context);
               LoadingDialog.showError(context, e);
@@ -133,7 +133,7 @@ class _EditCategoryDialog extends State<EditCategoryDialog> {
                   ),
                 );
                 LoadingDialog.hideLoadingDialog(context);
-                Navigator.of(context).pop();
+                Utils.closeDialog(context);
               }catch(e){
                 LoadingDialog.hideLoadingDialog(context);
                 LoadingDialog.showError(context, e);

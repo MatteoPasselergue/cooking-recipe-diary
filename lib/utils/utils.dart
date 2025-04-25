@@ -80,4 +80,14 @@ class Utils {
     'local_pizza': Icons.local_pizza,
   };
 
+  static void closeDialog(BuildContext context, {Object? data = null}) {
+    FocusScope.of(context).unfocus();
+    if(data != null){
+      Navigator.of(context).pop(data);
+    }else {
+      Navigator.of(context).pop();
+    }
+  }
+
+
 }

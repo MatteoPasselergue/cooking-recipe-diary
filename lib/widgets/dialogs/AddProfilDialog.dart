@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../services/LocalizationService.dart';
+import '../../utils/utils.dart';
 
 class AddProfileDialog extends StatefulWidget {
   @override
@@ -81,7 +82,7 @@ class _AddProfileDialogState extends State<AddProfileDialog> {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.pop(context);
+            Utils.closeDialog(context);
           },
           child: Text(LocalizationService.translate("cancel"), style: AppTheme.textButtonDialogStyle),
         ),
@@ -89,7 +90,7 @@ class _AddProfileDialogState extends State<AddProfileDialog> {
           onPressed: () {
             final name = _nameController.text.trim();
             if (name.isNotEmpty) {
-              Navigator.pop(context, {
+              Utils.closeDialog(context, data:{
                 'name': name,
                 'imagePath': _imagePath,
               });

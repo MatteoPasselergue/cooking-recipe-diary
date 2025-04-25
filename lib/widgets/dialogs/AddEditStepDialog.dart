@@ -1,4 +1,5 @@
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
+import 'package:cooking_recipe_diary/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -33,13 +34,13 @@ class AddEditStepDialog extends StatelessWidget {
         if (step != null)
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop({"action": "delete"});
+              Utils.closeDialog(context, data: {"action": "delete"});
             },
             child: Text(LocalizationService.translate("delete"),
                 style: AppTheme.textButtonDialogStyle),
           ),
         TextButton(
-          onPressed: () => Navigator.of(context).pop({"action": "cancel"}),
+          onPressed: () => Utils.closeDialog(context, data: {"action": "cancel"}),
           child: Text(LocalizationService.translate("cancel"),
               style: AppTheme.textButtonDialogStyle),
         ),
@@ -52,7 +53,7 @@ class AddEditStepDialog extends StatelessWidget {
               return;
             }
 
-            Navigator.of(context).pop({
+            Utils.closeDialog(context, data: {
               "action": "confirm",
               "step": content,
             });
