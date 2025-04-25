@@ -15,10 +15,14 @@ class IngredientContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     double amount = ingredient.quantity;
 
-    if(defaultServings != null && currentServings != null) {
-      if (defaultServings != 0) {
-        amount = ingredient.quantity * (currentServings! / defaultServings!);
-      }
+    if(defaultServings != null && currentServings != null && defaultServings != 0) amount = ingredient.quantity * (currentServings! / defaultServings!);
+
+    String displayAmount = '';
+    if (amount != 0) {
+      String s = amount.toStringAsFixed(2);
+      s = s.replaceAll(RegExp(r'0+$'), '');  
+      s = s.replaceAll(RegExp(r'\.$'), '');
+      displayAmount = s;
     }
 
     String unit = ingredient.unit;
@@ -28,7 +32,7 @@ class IngredientContainer extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: AppTheme.categoryButtonDecoration,
-        child: Text('${amount.toStringAsFixed(2)}$unit $name')
+        child: Text('$displayAmount$unit $name')
       ),
     );
   }

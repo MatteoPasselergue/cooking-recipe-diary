@@ -88,7 +88,7 @@ class AddEditIngredientDialog extends StatelessWidget {
             final String quantityText = quantityController.text.trim();
             final double? quantity = double.tryParse(quantityText);
 
-            if (name.isEmpty || quantity == null || unit.isEmpty) {
+            if (name.isEmpty) {
               Navigator.of(context).pop();
               return;
             }
@@ -96,7 +96,7 @@ class AddEditIngredientDialog extends StatelessWidget {
             Navigator.of(context).pop({
               "action": "confirm",
               "ingredient": Ingredient(
-                  name: name, quantity: quantity, unit: unit),
+                  name: name, quantity: quantity ?? 0, unit: unit),
             });
           },
           child: Text(LocalizationService.translate("confirm"),
