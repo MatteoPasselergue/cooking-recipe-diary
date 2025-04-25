@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../../services/LocalizationService.dart';
 import '../containers/IngredientContainer.dart';
 import '../dialogs/AddEditStepDialog.dart';
-import '../home/WavePainter.dart';
+import '../painter/WavePainter.dart';
 
 class EditorBody extends StatefulWidget {
   final Recipe recipe;

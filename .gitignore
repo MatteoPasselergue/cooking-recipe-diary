@@ -100,3 +100,9 @@ test/
 .flutter-plugins-dependencies
 
 .flutter-plugins
+
+linux/
+
+macos/
+
+windows/

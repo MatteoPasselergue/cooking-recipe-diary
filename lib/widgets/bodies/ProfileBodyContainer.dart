@@ -5,8 +5,8 @@ import '../../providers/LanguageProvider.dart';
 import '../../services/LocalizationService.dart';
 import '../../utils/AppConfig.dart';
 import '../dialogs/ConfirmationDialog.dart';
-import '../home/WavePainter.dart';
-import 'LogoutWaitScreen.dart';
+import '../painter/WavePainter.dart';
+import '../../screens/LogoutWaitScreen.dart';
 
 class ProfileBodyContainer extends StatefulWidget {
   @override

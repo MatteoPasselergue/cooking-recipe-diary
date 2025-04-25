@@ -10,7 +10,7 @@ import '../../utils/AppConfig.dart';
 import '../../utils/theme.dart';
 import '../containers/IngredientContainer.dart';
 import '../containers/StepContainer.dart';
-import '../home/WavePainter.dart';
+import '../painter/WavePainter.dart';
 
 class RecipeBody extends StatelessWidget {
   final Recipe recipe;

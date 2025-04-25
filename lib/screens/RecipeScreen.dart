@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../models/RecipeModel.dart';
 import '../utils/AppConfig.dart';
-import '../widgets/recipe/RecipeBody.dart';
-import '../widgets/recipe/RecipeHeader.dart';
+import '../widgets/bodies/RecipeBody.dart';
+import '../widgets/headers/RecipeHeader.dart';
 import 'HomeScreen.dart';
 
 class RecipeScreen extends StatefulWidget {

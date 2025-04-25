@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import '../../../providers/CategoryProvider.dart';
 import '../../../services/LocalizationService.dart';
 import '../../../utils/utils.dart';
-import 'AddCategoryDialog.dart';
-import 'EditCategoryDialog.dart';
+import '../dialogs/AddCategoryDialog.dart';
+import '../dialogs//EditCategoryDialog.dart';
 
 class CategoryButtons extends StatefulWidget {
   @override

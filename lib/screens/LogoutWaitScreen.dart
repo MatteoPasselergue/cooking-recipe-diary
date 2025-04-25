@@ -2,8 +2,8 @@ import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/UserProvider.dart';
-import '../../screens/ProfileSelectionScreen.dart';
+import '../providers/UserProvider.dart';
+import 'ProfileSelectionScreen.dart';
 
 class LogoutScreen extends StatefulWidget {
   final bool delete;

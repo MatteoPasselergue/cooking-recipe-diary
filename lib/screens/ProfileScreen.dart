@@ -1,8 +1,8 @@
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/profile/ProfileBodyContainer.dart';
-import '../widgets/profile/ProfileHeaderContainer.dart';
+import '../widgets/bodies/ProfileBodyContainer.dart';
+import '../widgets/headers/ProfileHeaderContainer.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

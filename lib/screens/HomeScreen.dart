@@ -1,6 +1,6 @@
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
-import 'package:cooking_recipe_diary/widgets/home/BodyContainer.dart';
-import 'package:cooking_recipe_diary/widgets/home/HeaderContainer.dart';
+import 'package:cooking_recipe_diary/widgets/bodies/BodyContainer.dart';
+import 'package:cooking_recipe_diary/widgets/headers/HeaderContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

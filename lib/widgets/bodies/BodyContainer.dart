@@ -1,7 +1,7 @@
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:flutter/material.dart';
-import '../category/CategoryButtons.dart';
-import 'WavePainter.dart';
+import '../buttons/CategoryButtons.dart';
+import '../painter/WavePainter.dart';
 
 class BodyContainer extends StatelessWidget {
   @override
