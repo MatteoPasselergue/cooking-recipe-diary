@@ -110,8 +110,12 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
     File? imageFile;
 
     if(ImageService.buildImageUrl("recipes", oldRecipe.id, version: oldRecipe.imageVersion) != headerData["imagePath"]){
-      imageVersion++;
-      imageFile = File(headerData["imagePath"]);
+      if(headerData["imagePath"] != null){
+        imageVersion++;
+        imageFile = File(headerData["imagePath"]);
+      }else{
+        imageVersion = 0;
+      }
     }
 
     final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
