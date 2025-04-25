@@ -126,4 +126,26 @@ class RecipeProvider extends ChangeNotifier {
     }
   }
 
+  Future<Recipe> importRecipe(int userId, String url) async {
+    try {
+
+      final bodyRequest = {
+        "url": url,
+        "defaultName": LocalizationService.translate("default_recipe_title"),
+        "note": LocalizationService.translate("imported_from") + url,
+        "UserId": userId
+      };
+
+      final newRecipeData = await ApiService.post('recipes/import', bodyRequest);
+      final newRecipe = Recipe.fromJson(newRecipeData);
+
+      _recipes.add(newRecipe);
+      notifyListeners();
+
+      return newRecipe;
+    } catch (e) {
+      throw Exception('Failed to create empty recipe: $e');
+    }
+  }
+
 }

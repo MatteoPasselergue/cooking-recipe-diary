@@ -20,7 +20,7 @@ class IngredientContainer extends StatelessWidget {
     String displayAmount = '';
     if (amount != 0) {
       String s = amount.toStringAsFixed(2);
-      s = s.replaceAll(RegExp(r'0+$'), '');  
+      s = s.replaceAll(RegExp(r'0+$'), '');
       s = s.replaceAll(RegExp(r'\.$'), '');
       displayAmount = s;
     }

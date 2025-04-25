@@ -57,6 +57,12 @@
   "ingredients": "Ingrédients",
   "steps": "Étapes",
 
+  "new_recipe_choice": "Créer ou importer une recette",
+  "create_from_scratch": "Créer une recette de toutes pièces",
+  "import_from_url": "Importer une recette à partir d'une URL",
+  "enter_recipe_url": "Entrez l'url de la recette",
+  "imported_from": "Importée depuis ",
+
   "created_by": "Crée par",
   "unknown_user": "Inconnu"
 }
