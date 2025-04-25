@@ -15,7 +15,11 @@ class CategoryProvider extends ChangeNotifier {
       _categories = data.map<Category>((item) => Category.fromJson(item)).toList();
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to fetch categories: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -29,7 +33,11 @@ class CategoryProvider extends ChangeNotifier {
       _categories.add(Category.fromJson(newCategory));
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to add category: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -46,7 +54,11 @@ class CategoryProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      throw Exception('Failed to update category: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -57,7 +69,11 @@ class CategoryProvider extends ChangeNotifier {
       _categories.removeWhere((c) => c.id == id);
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to delete category: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 }

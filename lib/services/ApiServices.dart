@@ -14,7 +14,8 @@ class ApiService {
       print(response.body);
       return json.decode(response.body);
     } else {
-      throw Exception('GET failed: ${response.statusCode}');
+      final error = jsonDecode(response.body);
+      throw FormatException('${error["error"] ?? "general_message_error"}');
     }
   }
 
@@ -26,7 +27,8 @@ class ApiService {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('GET by ID failed: ${response.statusCode}');
+      final error = jsonDecode(response.body);
+      throw FormatException('${error["error"] ?? "general_message_error"}');
     }
   }
 
@@ -42,7 +44,8 @@ class ApiService {
     if (response.statusCode == 201 || response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('POST failed: ${response.statusCode}');
+      final error = jsonDecode(response.body);
+      throw FormatException('${error["error"] ?? "general_message_error"}');
     }
   }
 
@@ -58,7 +61,8 @@ class ApiService {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('PUT failed: ${response.statusCode}');
+      final error = jsonDecode(response.body);
+      throw FormatException('${error["error"] ?? "general_message_error"}');
     }
   }
 
@@ -74,7 +78,8 @@ class ApiService {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('PATCH failed: ${response.statusCode}');
+      final error = jsonDecode(response.body);
+      throw FormatException('${error["error"] ?? "general_message_error"}');
     }
   }
 
@@ -84,7 +89,8 @@ class ApiService {
     final response = await http.delete(url);
 
     if (response.statusCode != 200 && response.statusCode != 204) {
-      throw Exception('DELETE failed: ${response.statusCode}');
+      final error = jsonDecode(response.body);
+      throw FormatException('${error["error"] ?? "general_message_error"}');
     }
   }
 }

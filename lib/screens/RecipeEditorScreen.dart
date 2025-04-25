@@ -142,7 +142,7 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
       );
     } catch(e){
       LoadingDialog.hideLoadingDialog(context);
-      LoadingDialog.showError(context, "$e");
+      LoadingDialog.showError(context, e);
     }
   }
 
@@ -161,8 +161,9 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
             (route) => false,
       );
 
-    }finally{
-      /*TODO: LoadingDialog.showSuccessMessage(context, "$e");*/
+    }catch(e){
+      LoadingDialog.hideLoadingDialog(context);
+      LoadingDialog.showError(context, e);
     }
 
   }

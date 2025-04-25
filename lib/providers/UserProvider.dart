@@ -25,7 +25,11 @@ class UserProvider extends ChangeNotifier {
       _users = data.map<User>((item) => User.fromJson(item)).toList();
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to fetch users: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -48,7 +52,11 @@ class UserProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to add user: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -67,7 +75,11 @@ class UserProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      throw Exception('Failed to update user: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -77,7 +89,11 @@ class UserProvider extends ChangeNotifier {
       _users.removeWhere((u) => u.id == id);
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to delete user: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 

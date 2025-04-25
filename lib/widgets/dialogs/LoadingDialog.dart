@@ -2,6 +2,7 @@ import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
 import 'package:cooking_recipe_diary/services/LocalizationService.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
+import 'package:cooking_recipe_diary/widgets/snackbar/AppSnackBar.dart';
 import 'package:flutter/material.dart';
 
 
@@ -77,11 +78,13 @@ class LoadingDialog {
     Navigator.of(context, rootNavigator: true).pop();
   }
 
-  static void showError(BuildContext context, String errorCode) {
-    /*TODO*/
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(errorCode)),
-    );
+  static void showError(BuildContext context, Object error) {
+    String errorCode = "general_message_error";
+    if(error is FormatException){
+      errorCode = error.message;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage(errorCode, error: true));
   }
-
 }
+
+

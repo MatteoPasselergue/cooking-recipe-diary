@@ -178,7 +178,7 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
 
       }catch(e){
         LoadingDialog.hideLoadingDialog(context);
-        LoadingDialog.showError(context, "$e");
+        LoadingDialog.showError(context, e);
       }
     }
   }
@@ -197,7 +197,7 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
 
     }catch (e){
       LoadingDialog.hideLoadingDialog(context);
-      LoadingDialog.showError(context, "$e");
+      LoadingDialog.showError(context, e);
     }
   }
 }

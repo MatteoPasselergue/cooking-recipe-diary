@@ -103,7 +103,7 @@ class _AddCategoryDialog extends State<AddCategoryDialog> {
                 Navigator.of(context).pop();
               }catch(e){
                 LoadingDialog.hideLoadingDialog(context);
-                LoadingDialog.showError(context, "$e");
+                LoadingDialog.showError(context, e);
               }
             }
           },

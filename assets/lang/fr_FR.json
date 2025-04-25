@@ -77,5 +77,30 @@
   "edit_user_waiting_message": "Modification de l'utilisateur en cours...",
   "add_category_waiting_message": "Ajout de la catégorie en cours...",
   "remove_category_waiting_message": "Suppression de la catégorie en cours...",
-  "edit_category_waiting_message": "Modification de la catégorie en cours..."
+  "edit_category_waiting_message": "Modification de la catégorie en cours...",
+
+  "general_message_error": "Une erreur est survenue, merci de réessayer.",
+  "no_recipe_page_found": "Aucune recette n'a été trouvée sur cette page !",
+  "missing_url": "L’URL est manquante.",
+  "failed_to_upload_image": "Échec de l’envoi de l’image.",
+
+  "failed_to_fetch_recipes": "Impossible de récupérer les recettes.",
+  "failed_to_fetch_categories": "Impossible de récupérer les catégories.",
+  "failed_to_fetch_tags": "Impossible de récupérer les tags.",
+  "failed_to_fetch_users": "Impossible de récupérer les utilisateurs.",
+
+  "failed_to_create_recipe": "Échec de la création de la recette.",
+  "failed_to_create_category": "Échec de la création de la catégorie.",
+  "failed_to_create_tag": "Échec de la création du tag.",
+  "failed_to_create_user": "Échec de la création de l’utilisateur.",
+
+  "failed_to_update_category": "Échec de la mise à jour de la catégorie.",
+  "failed_to_update_recipe": "Échec de la mise à jour de la recette.",
+  "failed_to_update_tag": "Échec de la mise à jour du tag.",
+  "failed_to_update_user": "Échec de la mise à jour de l’utilisateur.",
+
+  "recipe_not_found": "Recette introuvable.",
+  "image_not_found": "Image introuvable.",
+  "tag_not_found": "Tag introuvable.",
+  "category_not_found": "Catégorie introuvable."
 }

@@ -72,7 +72,7 @@ class ActionIconButton extends StatelessWidget {
 
               }catch (e){
                 LoadingDialog.hideLoadingDialog(context);
-                LoadingDialog.showError(context, "$e");
+                LoadingDialog.showError(context, e);
               }
               break;
             case "import":
@@ -89,7 +89,7 @@ class ActionIconButton extends StatelessWidget {
                 );
               }catch (e){
                 LoadingDialog.hideLoadingDialog(context);
-                LoadingDialog.showError(context, "$e");
+                LoadingDialog.showError(context, e);
               }
 
           }

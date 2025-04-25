@@ -17,7 +17,11 @@ class RecipeProvider extends ChangeNotifier {
       _recipes = data.map<Recipe>((item) => Recipe.fromJson(item)).toList();
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to fetch recipes: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -33,7 +37,11 @@ class RecipeProvider extends ChangeNotifier {
       _recipes.add(newRecipe);
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to add recipe: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -50,7 +58,11 @@ class RecipeProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      throw Exception('Failed to update recipe: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -92,7 +104,11 @@ class RecipeProvider extends ChangeNotifier {
       _recipes.removeWhere((r) => r.id == id);
       notifyListeners();
     } catch (e) {
-      throw Exception('Failed to delete recipe: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -122,7 +138,11 @@ class RecipeProvider extends ChangeNotifier {
 
       return newRecipe;
     } catch (e) {
-      throw Exception('Failed to create empty recipe: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 
@@ -144,7 +164,11 @@ class RecipeProvider extends ChangeNotifier {
 
       return newRecipe;
     } catch (e) {
-      throw Exception('Failed to create empty recipe: $e');
+      if(e is FormatException){
+        throw FormatException(e.message);
+      }else {
+        throw Exception("$e");
+      }
     }
   }
 

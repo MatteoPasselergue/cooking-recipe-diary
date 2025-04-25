@@ -115,7 +115,7 @@ class _EditCategoryDialog extends State<EditCategoryDialog> {
               Navigator.of(context).pop();
             }catch(e){
               LoadingDialog.hideLoadingDialog(context);
-              LoadingDialog.showError(context, "$e");
+              LoadingDialog.showError(context, e);
             }
           },
           child: Text(LocalizationService.translate("delete"), style: AppTheme.textButtonDialogStyle),
@@ -136,7 +136,7 @@ class _EditCategoryDialog extends State<EditCategoryDialog> {
                 Navigator.of(context).pop();
               }catch(e){
                 LoadingDialog.hideLoadingDialog(context);
-                LoadingDialog.showError(context, "$e");
+                LoadingDialog.showError(context, e);
               }
             }
           },

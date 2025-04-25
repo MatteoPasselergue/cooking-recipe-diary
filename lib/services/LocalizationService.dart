@@ -14,6 +14,10 @@ class LocalizationService {
     return _localizedStrings[key] ?? key;
   }
 
+  static String translateError(String key) {
+    return _localizedStrings[key] ?? _localizedStrings["general_message_error"] ?? "General Error";
+  }
+
   static Future<List<Map<String, String>>> getAvailableLocales() async {
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
