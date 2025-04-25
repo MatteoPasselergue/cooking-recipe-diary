@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class AppSnackBar {
   static SnackBar popMessage(String key, {bool error = false}){
     return SnackBar(
+      duration: const Duration(milliseconds: 1500),
         backgroundColor: AppConfig.backgroundColor,
-        content: Text((error) ? LocalizationService.translateError(key) : LocalizationService.translate(key), style: AppTheme.textButtonDialogStyle.copyWith(fontSize: 16),));
+        content: Text((error) ? LocalizationService.translateError(key) : LocalizationService.translate(key), style: AppTheme.textButtonDialogStyle.copyWith(color: AppConfig.primaryColor, fontWeight: FontWeight.bold),));
   }
 }

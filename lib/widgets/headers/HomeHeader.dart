@@ -9,7 +9,7 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: EdgeInsets.only(left: 16, right: 16, top: 30, bottom: 10),
       color: AppConfig.primaryColor,
       child: Column(
         children: [

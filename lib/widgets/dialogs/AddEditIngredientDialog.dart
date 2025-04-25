@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import '../../services/LocalizationService.dart';
 import '../../utils/theme.dart';
 import '../../utils/utils.dart';
+import '../snackbar/AppSnackBar.dart';
 
 class AddEditIngredientDialog extends StatelessWidget {
   final Ingredient? ingredient;
@@ -89,16 +90,16 @@ class AddEditIngredientDialog extends StatelessWidget {
             final String quantityText = quantityController.text.trim();
             final double? quantity = double.tryParse(quantityText);
 
-            if (name.isEmpty) {
-              Navigator.of(context).pop();
-              return;
+            if (name.isNotEmpty) {
+              Utils.closeDialog(context, data: {
+                "action": "confirm",
+                "ingredient": Ingredient(
+                    name: name, quantity: quantity ?? 0, unit: unit),
+              });
+            }else{
+              ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage("ingredient_cant_be_empty", error: false));
             }
 
-            Utils.closeDialog(context, data: {
-              "action": "confirm",
-              "ingredient": Ingredient(
-                  name: name, quantity: quantity ?? 0, unit: unit),
-            });
           },
           child: Text(LocalizationService.translate("confirm"),
               style: AppTheme.textButtonDialogStyle),

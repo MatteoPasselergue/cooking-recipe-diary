@@ -7,6 +7,7 @@ import '../../services/LocalizationService.dart';
 import '../../utils/AppConfig.dart';
 import '../../utils/theme.dart';
 import '../../utils/utils.dart';
+import '../snackbar/AppSnackBar.dart';
 import 'LoadingDialog.dart';
 
 class AddCategoryDialog extends StatefulWidget {
@@ -105,6 +106,8 @@ class _AddCategoryDialog extends State<AddCategoryDialog> {
                 LoadingDialog.hideLoadingDialog(context);
                 LoadingDialog.showError(context, e);
               }
+            }else{
+              ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage("category_name_cant_be_empty", error: false));
             }
           },
           child: Text(LocalizationService.translate("add"), style: AppTheme.textButtonDialogStyle),

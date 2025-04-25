@@ -98,6 +98,12 @@ class AppTheme {
         cancelButtonStyle: TextButton.styleFrom(backgroundColor: AppConfig.backgroundColor, textStyle: textButtonDialogStyle, foregroundColor: AppConfig.primaryColor),
         confirmButtonStyle: TextButton.styleFrom(backgroundColor: AppConfig.backgroundColor, textStyle: textButtonDialogStyle, foregroundColor: AppConfig.primaryColor)
       ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: FadeTransitionBuilder(),
+          TargetPlatform.iOS: FadeTransitionBuilder(),
+        },
+      ),
     );
   }
 
@@ -113,3 +119,27 @@ class AppTheme {
     color: AppConfig.textColor,
   );
 }
+
+class FadeTransitionBuilder extends PageTransitionsBuilder {
+  const FadeTransitionBuilder();
+
+  @override
+  Widget buildTransitions<T>(PageRoute<T> route,
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child,) {
+    var opacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: animation,
+        curve: Curves.easeInOut,
+      ),
+    );
+
+    return FadeTransition(
+      opacity: opacity,
+      child: child,
+    );
+  }
+}
+

@@ -142,7 +142,7 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: AppConfig.backgroundColor.withOpacity(0.6),
+                      color: AppConfig.backgroundColor,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(

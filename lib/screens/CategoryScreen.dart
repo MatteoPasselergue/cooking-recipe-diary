@@ -78,7 +78,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       backgroundColor: AppConfig.primaryColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+          padding: const EdgeInsets.only(top: 20),
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
@@ -116,7 +116,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 delegate: SliverChildBuilderDelegate(
                       (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 45),
                       child: RecipeCardButton(recipe: displayedRecipes[index]),
                     );
                   },

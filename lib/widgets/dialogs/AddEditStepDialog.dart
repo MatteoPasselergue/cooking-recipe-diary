@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../services/LocalizationService.dart';
 import '../../utils/theme.dart';
+import '../snackbar/AppSnackBar.dart';
 
 class AddEditStepDialog extends StatelessWidget {
   final String? step;
@@ -48,15 +49,14 @@ class AddEditStepDialog extends StatelessWidget {
           onPressed: () {
             final String content = stepController.text.trim();
 
-            if (content.isEmpty) {
-              Navigator.of(context).pop();
-              return;
+            if (content.isNotEmpty) {
+              Utils.closeDialog(context, data: {
+                "action": "confirm",
+                "step": content,
+              });
+            }else{
+              ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage("step_cant_be_empty", error: false));
             }
-
-            Utils.closeDialog(context, data: {
-              "action": "confirm",
-              "step": content,
-            });
           },
           child: Text(LocalizationService.translate("confirm"),
               style: AppTheme.textButtonDialogStyle),

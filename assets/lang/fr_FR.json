@@ -72,7 +72,10 @@
   "cook_time": "Temps de cuisson",
   "servings": "Nombre de personnes/ Nombre de pièces",
   "recipe_name_cant_be_empty": "Le nom de la recette ne peut pas être vide.",
-
+  "category_name_cant_be_empty": "Le nom de la catégorie ne peut pas être vide.",
+  "tag_cant_be_empty": "Le tag ne peut pas être vide.",
+  "step_cant_be_empty": "Une étape de recette ne peut pas être vide.",
+  "ingredient_cant_be_empty": "Le champ 'Ingrédient' ne peut pas être vide.",
 
 
   "be_patient_message": "Veuillez patienter quelques instants...",

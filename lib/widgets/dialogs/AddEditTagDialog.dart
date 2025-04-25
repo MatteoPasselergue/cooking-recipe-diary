@@ -3,6 +3,7 @@ import 'package:cooking_recipe_diary/utils/utils.dart';
 import 'package:flutter/material.dart';
 import '../../services/LocalizationService.dart';
 import '../../utils/theme.dart';
+import '../snackbar/AppSnackBar.dart';
 
 class AddEditTagDialog extends StatelessWidget {
   final String? tag;
@@ -37,7 +38,11 @@ class AddEditTagDialog extends StatelessWidget {
         TextButton(
           onPressed: () {
             final newName = controller.text.trim();
-            Utils.closeDialog(context, data: {"action": "confirm", "tag": newName});
+            if(newName.isNotEmpty){
+              Utils.closeDialog(context, data: {"action": "confirm", "tag": newName});
+            }else{
+              ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage("tag_cant_be_empty", error: false));
+            }
           },
           child: Text(LocalizationService.translate("confirm"), style: AppTheme.textButtonDialogStyle,),
         ),
