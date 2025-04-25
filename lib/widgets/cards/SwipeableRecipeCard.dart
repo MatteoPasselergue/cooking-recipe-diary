@@ -4,6 +4,7 @@ import 'package:cooking_recipe_diary/models/CategoryModel.dart';
 import 'package:cooking_recipe_diary/providers/CategoryProvider.dart';
 import 'package:cooking_recipe_diary/services/ImageService.dart';
 import 'package:cooking_recipe_diary/utils/utils.dart';
+import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cooking_recipe_diary/models/RecipeModel.dart';
@@ -76,7 +77,7 @@ class _SwipeableRecipeCardState extends State<SwipeableRecipeCard> with SingleTi
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return SpinningIcon(icon: Icons.restaurant, color: AppConfig.backgroundColor,);
     }
 
     final recipeProvider = Provider.of<RecipeProvider>(context);

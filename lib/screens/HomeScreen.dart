@@ -1,6 +1,6 @@
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
-import 'package:cooking_recipe_diary/widgets/bodies/BodyContainer.dart';
-import 'package:cooking_recipe_diary/widgets/headers/HeaderContainer.dart';
+import 'package:cooking_recipe_diary/widgets/bodies/HomeBody.dart';
+import 'package:cooking_recipe_diary/widgets/headers/HomeHeader.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             expandedHeight: headerHeight,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: HeaderContainer(),
+              background: HomeHeader(),
               title: const Text(''),
             ),
             automaticallyImplyLeading: false,
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SliverToBoxAdapter(
-            child: BodyContainer(),
+            child: HomeBody(),
           ),
         ],
       ),

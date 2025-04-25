@@ -1,5 +1,6 @@
 import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
+import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/UserProvider.dart';
@@ -25,7 +26,7 @@ class _LogoutScreenState extends State<LogoutScreen> {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
 
-    if(widget.delete){
+    if (widget.delete) {
       await userProvider.deleteUser(userProvider.profile!.id);
       await recipeProvider.removeUserFromRecipes(userProvider.profile!.id);
     }
@@ -41,9 +42,9 @@ class _LogoutScreenState extends State<LogoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConfig.backgroundColor,
+      backgroundColor: AppConfig.primaryColor,
       body: Center(
-        child: CircularProgressIndicator(color: AppConfig.primaryColor,),
+        child: SpinningIcon(icon: Icons.restaurant, color: AppConfig.backgroundColor,),
       ),
     );
   }

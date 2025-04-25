@@ -8,6 +8,7 @@ import '../../../services/LocalizationService.dart';
 import '../../../utils/AppConfig.dart';
 import '../../../utils/theme.dart';
 import '../../../utils/utils.dart';
+import 'LoadingDialog.dart';
 
 class EditCategoryDialog extends StatefulWidget {
   final Category category;
@@ -100,25 +101,43 @@ class _EditCategoryDialog extends State<EditCategoryDialog> {
         ),
         TextButton(
           onPressed: () async {
-            final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
-            await recipeProvider.removeCategoryFromRecipes(widget.category.id);
+            final recipeProvider = Provider.of<RecipeProvider>(
+                context, listen: false);
 
-            await categoryProvider.deleteCategory(widget.category.id);
-            Navigator.of(context).pop();
+            LoadingDialog.showLoadingDialog(context, "remove_category");
+            try {
+              await recipeProvider.removeCategoryFromRecipes(
+                  widget.category.id);
+
+              await categoryProvider.deleteCategory(widget.category.id);
+
+              LoadingDialog.hideLoadingDialog(context);
+              Navigator.of(context).pop();
+            }catch(e){
+              LoadingDialog.hideLoadingDialog(context);
+              LoadingDialog.showError(context, "$e");
+            }
           },
           child: Text(LocalizationService.translate("delete"), style: AppTheme.textButtonDialogStyle),
         ),
         TextButton(
           onPressed: () async {
             if (_nameController.text.isNotEmpty) {
-              await categoryProvider.updateCategory(
-                Category(
-                  id: widget.category.id,
-                  name: _nameController.text,
-                  iconName: _selectedIconName,
-                ),
-              );
-              Navigator.of(context).pop();
+              LoadingDialog.showLoadingDialog(context, "edit_category");
+              try {
+                await categoryProvider.updateCategory(
+                  Category(
+                    id: widget.category.id,
+                    name: _nameController.text,
+                    iconName: _selectedIconName,
+                  ),
+                );
+                LoadingDialog.hideLoadingDialog(context);
+                Navigator.of(context).pop();
+              }catch(e){
+                LoadingDialog.hideLoadingDialog(context);
+                LoadingDialog.showError(context, "$e");
+              }
             }
           },
           child: Text(LocalizationService.translate("edit"), style: AppTheme.textButtonDialogStyle),

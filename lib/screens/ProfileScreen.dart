@@ -1,8 +1,8 @@
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/bodies/ProfileBodyContainer.dart';
-import '../widgets/headers/ProfileHeaderContainer.dart';
+import '../widgets/bodies/ProfileBody.dart';
+import '../widgets/headers/ProfileHeader.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -19,8 +19,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: AppConfig.primaryColor,
       body: Column(
         children: [
-          ProfileHeaderContainer(),
-          ProfileBodyContainer(),
+          ProfileHeader(),
+          ProfileBody(),
         ],
       ),
     );

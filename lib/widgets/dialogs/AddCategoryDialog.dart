@@ -7,6 +7,7 @@ import '../../services/LocalizationService.dart';
 import '../../utils/AppConfig.dart';
 import '../../utils/theme.dart';
 import '../../utils/utils.dart';
+import 'LoadingDialog.dart';
 
 class AddCategoryDialog extends StatefulWidget {
   @override
@@ -87,14 +88,23 @@ class _AddCategoryDialog extends State<AddCategoryDialog> {
         TextButton(
           onPressed: () async {
             if (_nameController.text.isNotEmpty) {
-              await categoryProvider.addCategory(
-                Category(
-                  id: 0,
-                  name: _nameController.text,
-                  iconName: _selectedIconName,
-                ),
-              );
-              Navigator.of(context).pop();
+              LoadingDialog.showLoadingDialog(context, "add_category");
+              try{
+                await categoryProvider.addCategory(
+                  Category(
+                    id: 0,
+                    name: _nameController.text,
+                    iconName: _selectedIconName,
+                  ),
+                );
+
+                LoadingDialog.hideLoadingDialog(context);
+
+                Navigator.of(context).pop();
+              }catch(e){
+                LoadingDialog.hideLoadingDialog(context);
+                LoadingDialog.showError(context, "$e");
+              }
             }
           },
           child: Text(LocalizationService.translate("add"), style: AppTheme.textButtonDialogStyle),

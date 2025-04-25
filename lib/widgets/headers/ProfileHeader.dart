@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cooking_recipe_diary/widgets/dialogs/EditProfilDialog.dart';
+import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:provider/provider.dart';
@@ -11,16 +12,17 @@ import '../../providers/UserProvider.dart';
 import '../../screens/ProfileSelectionScreen.dart';
 import '../../services/ImageService.dart';
 import '../../utils/AppConfig.dart';
+import '../dialogs/LoadingDialog.dart';
 
 
-class ProfileHeaderContainer extends StatefulWidget {
-  const ProfileHeaderContainer({super.key});
+class ProfileHeader extends StatefulWidget {
+  const ProfileHeader({super.key});
 
   @override
-  State<ProfileHeaderContainer> createState() => _ProfileHeaderContainerState();
+  State<ProfileHeader> createState() => _ProfileHeaderState();
 }
 
-class _ProfileHeaderContainerState extends State<ProfileHeaderContainer> {
+class _ProfileHeaderState extends State<ProfileHeader> {
 
 
   @override
@@ -50,14 +52,11 @@ class _ProfileHeaderContainerState extends State<ProfileHeaderContainer> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: SpinningIcon(icon: Icons.restaurant, color: AppConfig.backgroundColor,));
     }
 
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.profile!;
-
-    print(user.name);
-    print(user.imageVersion);
 
     return Padding(
       padding: EdgeInsets.only(top: 60, bottom: 30),
@@ -138,10 +137,21 @@ class _ProfileHeaderContainerState extends State<ProfileHeaderContainer> {
         await DefaultCacheManager().removeFile(oldUrl);
         if(result["imagePath"] != null ) imageVersion = user.imageVersion + 1;
       }
-      userProvider.updateUser(
-        User(id: user.id, name: result["name"], imageVersion: imageVersion), imageFile: (result["imagePath"] != null) ? File(result["imagePath"]) : null
-      );
-      userProvider.saveProfile(User(id: user.id, name: result["name"], imageVersion: imageVersion));
+
+      LoadingDialog.showLoadingDialog(context, "edit_user");
+      try {
+        await userProvider.updateUser(
+            User(id: user.id, name: result["name"], imageVersion: imageVersion), imageFile: (result["imagePath"] != null) ? File(result["imagePath"]) : null
+        );
+        await userProvider.saveProfile(User(id: user.id, name: result["name"], imageVersion: imageVersion));
+
+        LoadingDialog.hideLoadingDialog(context);
+
+      }catch(e){
+        LoadingDialog.hideLoadingDialog(context);
+        LoadingDialog.showError(context, "$e");
+      }
+
     }
   }
 

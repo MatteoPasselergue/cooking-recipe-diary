@@ -6,10 +6,12 @@ import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/widgets/bodies/EditorBody.dart';
 import 'package:cooking_recipe_diary/widgets/headers/EditorHeader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:provider/provider.dart';
 import '../models/RecipeModel.dart';
 import '../services/LocalizationService.dart';
 import '../widgets/dialogs/ConfirmationDialog.dart';
+import '../widgets/dialogs/LoadingDialog.dart';
 import 'HomeScreen.dart';
 import 'RecipeScreen.dart';
 
@@ -111,34 +113,57 @@ class _RecipeEditorScreenState extends State<RecipeEditorScreen> {
 
     if(ImageService.buildImageUrl("recipes", oldRecipe.id, version: oldRecipe.imageVersion) != headerData["imagePath"]){
       if(headerData["imagePath"] != null){
+        await DefaultCacheManager().removeFile(ImageService.buildImageUrl("recipes", oldRecipe.id, version: oldRecipe.imageVersion));
         imageVersion++;
         imageFile = File(headerData["imagePath"]);
       }else{
         imageVersion = 0;
+        await DefaultCacheManager().removeFile(ImageService.buildImageUrl("recipes", oldRecipe.id, version: oldRecipe.imageVersion));
       }
     }
 
     final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
     final Recipe newRecipe = Recipe(id: oldRecipe.id, name: name, ingredients: ingredients, steps: steps, prepTime: prepTime, cookTime: cookTime, restTime: restTime, servings: servings, categoryId: categoryId, tags: tags, userId: oldRecipe.userId, imageVersion: imageVersion, note: note);
 
-    await recipeProvider.updateRecipe(newRecipe, imageFile: imageFile);
+    LoadingDialog.showLoadingDialog(context, "edit_recipe");
+    try {
 
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-          (route) => false,
-    );
+      await recipeProvider.updateRecipe(newRecipe, imageFile: imageFile);
 
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => RecipeScreen(recipe: newRecipe)),
-    );
+      LoadingDialog.hideLoadingDialog(context);
+
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+            (route) => false,
+      );
+
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => RecipeScreen(recipe: newRecipe)),
+      );
+    } catch(e){
+      LoadingDialog.hideLoadingDialog(context);
+      LoadingDialog.showError(context, "$e");
+    }
   }
 
   void deleteRecipe() async {
     final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
-    await recipeProvider.deleteRecipe(widget.recipe.id);
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-          (route) => false,
-    );
+
+    LoadingDialog.showLoadingDialog(context, "remove_recipe");
+
+    try {
+      await recipeProvider.deleteRecipe(widget.recipe.id);
+
+      LoadingDialog.hideLoadingDialog(context);
+
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+            (route) => false,
+      );
+
+    }finally{
+      /*TODO: LoadingDialog.showSuccessMessage(context, "$e");*/
+    }
+
   }
 }

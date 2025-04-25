@@ -1,12 +1,14 @@
 import 'package:cooking_recipe_diary/models/CategoryModel.dart';
 import 'package:cooking_recipe_diary/screens/CategoryScreen.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
+import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/CategoryProvider.dart';
 import '../../../services/LocalizationService.dart';
 import '../../../utils/utils.dart';
+import '../../utils/AppConfig.dart';
 import '../dialogs/AddCategoryDialog.dart';
 import '../dialogs//EditCategoryDialog.dart';
 
@@ -39,7 +41,7 @@ class _CategoryButtonsState extends State<CategoryButtons> {
     final categoryProvider = Provider.of<CategoryProvider>(context);
 
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return SpinningIcon(icon: Icons.restaurant, color: AppConfig.primaryColor);
     }
 
     return GridView.builder(

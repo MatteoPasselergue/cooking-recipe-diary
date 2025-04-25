@@ -85,6 +85,7 @@ class UserProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('profile', jsonEncode(user.toJson()));
     _profile = user;
+    notifyListeners();
   }
 
   Future<void> loadProfile() async {

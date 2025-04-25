@@ -3,8 +3,8 @@ import 'package:cooking_recipe_diary/widgets/buttons/ActionIconButton.dart';
 import 'package:cooking_recipe_diary/widgets/cards/SwipeableRecipeCard.dart';
 import 'package:flutter/material.dart';
 
-class HeaderContainer extends StatelessWidget {
-  const HeaderContainer({super.key});
+class HomeHeader extends StatelessWidget {
+  const HomeHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

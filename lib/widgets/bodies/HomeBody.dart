@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../buttons/CategoryButtons.dart';
 import '../painter/WavePainter.dart';
 
-class BodyContainer extends StatelessWidget {
+class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [

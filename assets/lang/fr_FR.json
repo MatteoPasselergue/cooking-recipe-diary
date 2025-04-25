@@ -64,5 +64,18 @@
   "imported_from": "Importée depuis ",
 
   "created_by": "Crée par",
-  "unknown_user": "Inconnu"
+  "unknown_user": "Inconnu",
+
+
+  "be_patient_message": "Veuillez patienter quelques instants...",
+  "importation_waiting_message": "L'importation d'une recette peut prendre jusqu'à 30 secondes.",
+  "add_recipe_waiting_message": "Ajout de la recette en cours....",
+  "edit_recipe_waiting_message": "Modification de la recette en cours...",
+  "remove_recipe_waiting_message": "Suppression de la recette en cours...",
+  "add_user_waiting_message": "Ajout de l'utilisateur en cours...",
+  "save_profile_waiting_message": "Enregistrement du profil en cours...",
+  "edit_user_waiting_message": "Modification de l'utilisateur en cours...",
+  "add_category_waiting_message": "Ajout de la catégorie en cours...",
+  "remove_category_waiting_message": "Suppression de la catégorie en cours...",
+  "edit_category_waiting_message": "Modification de la catégorie en cours..."
 }

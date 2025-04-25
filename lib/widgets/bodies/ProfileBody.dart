@@ -8,12 +8,12 @@ import '../dialogs/ConfirmationDialog.dart';
 import '../painter/WavePainter.dart';
 import '../../screens/LogoutWaitScreen.dart';
 
-class ProfileBodyContainer extends StatefulWidget {
+class ProfileBody extends StatefulWidget {
   @override
-  _ProfileBodyContainerState createState() => _ProfileBodyContainerState();
+  _ProfileBodyState createState() => _ProfileBodyState();
 }
 
-class _ProfileBodyContainerState extends State<ProfileBodyContainer> {
+class _ProfileBodyState extends State<ProfileBody> {
   @override
   Widget build(BuildContext context) {
     final languageProvider = Provider.of<LanguageProvider>(context);

@@ -1,6 +1,8 @@
 import 'package:cooking_recipe_diary/providers/UserProvider.dart';
 import 'package:cooking_recipe_diary/screens/ProfileScreen.dart';
 import 'package:cooking_recipe_diary/screens/SearchScreen.dart';
+import 'package:cooking_recipe_diary/widgets/dialogs/AddImportRecipeDialog.dart';
+import 'package:cooking_recipe_diary/widgets/dialogs/LoadingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
@@ -51,12 +53,47 @@ class ActionIconButton extends StatelessWidget {
         break;
       case "add":
         final userProvider = Provider.of<UserProvider>(context, listen: false);
-        final newRecipe = await Provider.of<RecipeProvider>(context, listen: false).createEmptyRecipe(userProvider.profile!.id);
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => RecipeEditorScreen(recipe: newRecipe),
-          ),
-        );
+        final result = await showDialog(context: context, builder: (_) => AddImportRecipeDialog());
+
+        if(result != null && result["action"] != null){
+          switch(result["action"]){
+            case "add":
+              LoadingDialog.showLoadingDialog(context, "add_recipe");
+              try{
+                final newRecipe = await Provider.of<RecipeProvider>(context, listen: false).createEmptyRecipe(userProvider.profile!.id);
+
+                LoadingDialog.hideLoadingDialog(context);
+
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => RecipeEditorScreen(recipe: newRecipe),
+                  ),
+                );
+
+              }catch (e){
+                LoadingDialog.hideLoadingDialog(context);
+                LoadingDialog.showError(context, "$e");
+              }
+              break;
+            case "import":
+              LoadingDialog.showLoadingDialog(context, "import");
+              try{
+                final newRecipe = await Provider.of<RecipeProvider>(context, listen: false).importRecipe(userProvider.profile!.id, result["url"]);
+
+                LoadingDialog.hideLoadingDialog(context);
+
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => RecipeEditorScreen(recipe: newRecipe),
+                  ),
+                );
+              }catch (e){
+                LoadingDialog.hideLoadingDialog(context);
+                LoadingDialog.showError(context, "$e");
+              }
+
+          }
+        }
         break;
     }
   }

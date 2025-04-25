@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
+import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ import '../providers/UserProvider.dart';
 import '../services/ImageService.dart';
 import '../services/LocalizationService.dart';
 import '../widgets/dialogs/AddProfilDialog.dart';
+import '../widgets/dialogs/LoadingDialog.dart';
 import 'HomeScreen.dart';
 
 class ProfileSelectionScreen extends StatefulWidget {
@@ -52,7 +54,7 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
     final userProvider = Provider.of<UserProvider>(context);
 
     if (_isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return SpinningIcon(icon: Icons.restaurant, color: AppConfig.primaryColor,);
     }
 
     return Scaffold(
@@ -156,21 +158,47 @@ class _ProfileSelectionScreenState extends State<ProfileSelectionScreen> {
     );
 
     if(result !=null) {
-      userProvider.addUser(
-        User(
-          id: 0,
-          name: result["name"],
-          imageVersion: (result["imagePath"] != null) ? 1 : 0
-        ), imageFile: (result["imagePath"] != null) ? File(result["imagePath"]) : null);
-      Navigator.of(context).popUntil((route) => route.isFirst);
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+
+      LoadingDialog.showLoadingDialog(context, "add_user");
+
+      try{
+        await userProvider.addUser(
+            User(
+                id: 0,
+                name: result["name"],
+                imageVersion: (result["imagePath"] != null) ? 1 : 0),
+            imageFile: (result["imagePath"] != null)
+                ? File(result["imagePath"])
+                : null);
+
+        LoadingDialog.hideLoadingDialog(context);
+
+        Navigator.of(context).popUntil((route) => route.isFirst);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+
+      }catch(e){
+        LoadingDialog.hideLoadingDialog(context);
+        LoadingDialog.showError(context, "$e");
+      }
     }
   }
 
   void _onProfileSelected(UserProvider userProvider, User user) async {
-    await userProvider.saveProfile(user);
-    Navigator.of(context).popUntil((route) => route.isFirst);
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+    LoadingDialog.showLoadingDialog(context, "save_profile");
+
+    try {
+      await userProvider.saveProfile(user);
+
+      LoadingDialog.hideLoadingDialog(context);
+
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+
+    }catch (e){
+      LoadingDialog.hideLoadingDialog(context);
+      LoadingDialog.showError(context, "$e");
+    }
   }
 }
 
