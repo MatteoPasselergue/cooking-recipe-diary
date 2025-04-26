@@ -111,5 +111,6 @@
   "recipe_not_found": "Recipe not found.",
   "image_not_found": "Image not found.",
   "tag_not_found": "Tag not found.",
-  "category_not_found": "Category not found."
+  "category_not_found": "Category not found.",
+  "no_connection": "No connection, please connect to access the app."
 }

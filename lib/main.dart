@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cooking_recipe_diary/providers/CategoryProvider.dart';
 import 'package:cooking_recipe_diary/providers/LanguageProvider.dart';
 import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
@@ -7,7 +8,9 @@ import 'package:cooking_recipe_diary/screens/ProfileSelectionScreen.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
 import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
+import 'package:cooking_recipe_diary/widgets/snackbar/AppSnackBar.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -64,6 +67,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
+  bool _ready = false;
 
   @override
   void initState() {
@@ -79,14 +83,53 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Future.delayed(const Duration(seconds: 1), () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => widget.profileData == null ? ProfileSelectionScreen() : const HomeScreen(),),
-          );
-        });
+        _initialize();
       }
     });
+  }
+
+  Future<void> _initialize() async {
+    await _checkPermissions();
+    await _checkInternet();
+    if (mounted) {
+      setState(() {
+        _ready = true;
+      });
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => widget.profileData == null ? ProfileSelectionScreen() : const HomeScreen(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _checkPermissions() async {
+    await [
+      Permission.storage,
+      Permission.photos,
+      Permission.manageExternalStorage,
+    ].request();
+  }
+
+  Future<void> _checkInternet() async {
+    bool hasInternet = false;
+    while (!hasInternet) {
+      try {
+        final result = await InternetAddress.lookup("example.com")
+            .timeout(const Duration(seconds: 5));
+        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+          hasInternet = true;
+          break;
+        }
+      } catch (_) {
+      }
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(AppSnackBar.popMessage("no_connection"));
+      }
+      await Future.delayed(const Duration(seconds: 2));
+    }
   }
 
   @override

@@ -111,5 +111,6 @@
   "recipe_not_found": "Recette introuvable.",
   "image_not_found": "Image introuvable.",
   "tag_not_found": "Tag introuvable.",
-  "category_not_found": "Catégorie introuvable."
+  "category_not_found": "Catégorie introuvable.",
+  "no_connection": "Aucune connexion, connectez-vous pour accéder à l'application."
 }
