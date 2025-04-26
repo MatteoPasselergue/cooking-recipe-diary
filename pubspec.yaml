@@ -76,6 +76,7 @@ flutter:
     - assets/config.json
     - assets/lang/fr_FR.json
     - assets/lang/en_US.json
+    - assets/lang/it_IT.json
 
   fonts:
     - family: Rokkitt

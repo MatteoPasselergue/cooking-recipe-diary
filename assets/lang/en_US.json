@@ -1,0 +1,115 @@
+{
+  "language_name": "English (US)",
+
+  "add_category": "Add category",
+  "edit_category": "Edit category",
+  "cancel": "Cancel",
+  "name_category": "Category name",
+  "no_category": "No category",
+  "all_categories": "All recipes",
+  "add": "Add",
+  "confirm": "Confirm",
+  "delete": "Delete",
+  "logout": "Log out",
+  "edit": "Edit",
+  "no_recipes_found": "No recipes found",
+  "lang": "Language",
+  "search_recipes": "Search recipes",
+  "filter_by_category": "Filter by category",
+
+  "choose_profile": "Choose profile",
+  "add_profile": "Create profile",
+  "edit_profile": "Edit profile",
+  "delete_profile": "Delete profile",
+  "username": "Username",
+  "remove_image": "Remove image",
+
+  "edit_tag": "Edit tag",
+  "add_tag": "Add tag",
+  "name_tag": "Tag name",
+
+  "edit_step": "Edit step",
+  "add_step": "Add step",
+  "step_content": "Step content",
+
+  "add_ingredient": "Add ingredient",
+  "edit_ingredient": "Edit ingredient",
+  "ingredient_name": "Ingredient",
+  "ingredient_quantity": "Quantity",
+  "ingredient_unit": "Unit",
+  "note": "Write a note...",
+
+  "confirm_delete_title_recipe": "Delete recipe permanently",
+  "confirm_delete_message_recipe": "This action is irreversible. Are you sure you want to delete this recipe?",
+
+  "confirm_no_save_modification_title": "Discard changes ?",
+  "confirm_no_save_modification_message": "You have unsaved changes. Are you sure you want to leave ?",
+
+  "confirm_logout_title": "Log out of profile",
+  "confirm_logout_message": "Are you sure you want to log out ?",
+  "confirm_delete_title": "Delete profile permanently",
+  "confirm_delete_message": "This action is irreversible. Are you sure you want to delete your profile ?",
+
+  "error_missing_username": "Username field must be filled.",
+
+  "default_recipe_title": "My new recipe",
+  "ingredients": "Ingredients",
+  "steps": "Steps",
+
+  "new_recipe_choice": "Create or import a recipe",
+  "create_from_scratch": "Create recipe from scratch",
+  "import_from_url": "Import recipe from URL",
+  "enter_recipe_url": "Enter recipe URL",
+  "imported_from": "Imported from ",
+
+  "created_by": "Created by",
+  "unknown_user": "Unknown",
+
+  "total_time": "Total time",
+  "prep_time": "Prep time",
+  "rest_time": "Rest time",
+  "cook_time": "Cook time",
+  "servings": "Number of people / Number of items",
+  "recipe_name_cant_be_empty": "Recipe name cannot be empty.",
+  "category_name_cant_be_empty": "Category name cannot be empty.",
+  "tag_cant_be_empty": "Tag cannot be empty.",
+  "step_cant_be_empty": "Step content cannot be empty.",
+  "ingredient_cant_be_empty": "Ingredient field cannot be empty.",
+
+  "be_patient_message": "Please wait a moment...",
+  "importation_waiting_message": "Importing a recipe can take up to 30 seconds.",
+  "add_recipe_waiting_message": "Adding recipe...",
+  "edit_recipe_waiting_message": "Editing recipe...",
+  "remove_recipe_waiting_message": "Removing recipe...",
+  "add_user_waiting_message": "Adding user...",
+  "save_profile_waiting_message": "Saving profile...",
+  "edit_user_waiting_message": "Editing user...",
+  "add_category_waiting_message": "Adding category...",
+  "remove_category_waiting_message": "Removing category...",
+  "edit_category_waiting_message": "Editing category...",
+
+  "general_message_error": "An error occurred, please try again.",
+  "no_recipe_page_found": "No recipe found on this page !",
+  "missing_url": "URL is missing.",
+  "failed_to_upload_image": "Failed to upload image.",
+
+  "failed_to_fetch_recipes": "Failed to fetch recipes.",
+  "failed_to_fetch_categories": "Failed to fetch categories.",
+  "failed_to_fetch_tags": "Failed to fetch tags.",
+  "failed_to_fetch_users": "Failed to fetch users.",
+
+  "failed_to_create_recipe": "Failed to create recipe.",
+  "failed_to_create_category": "Failed to create category.",
+  "failed_to_create_tag": "Failed to create tag.",
+  "failed_to_create_user": "Failed to create user.",
+
+  "failed_to_update_category": "Failed to update category.",
+  "failed_to_update_recipe": "Failed to update recipe.",
+  "failed_to_update_tag": "Failed to update tag.",
+  "failed_to_update_user": "Failed to update user.",
+
+  "recipe_not_found": "Recipe not found.",
+  "image_not_found": "Image not found.",
+  "tag_not_found": "Tag not found.",
+  "category_not_found": "Category not found."
+}

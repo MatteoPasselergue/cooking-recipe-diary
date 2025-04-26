@@ -4,6 +4,7 @@ import 'package:cooking_recipe_diary/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/theme.dart';
+import '../snackbar/AppSnackBar.dart';
 
 class AddImportRecipeDialog extends StatelessWidget {
   final TextEditingController urlController = TextEditingController();
@@ -74,6 +75,8 @@ class AddImportRecipeDialog extends StatelessWidget {
             String url = urlController.text;
             if(url.isNotEmpty){
               Utils.closeDialog(context, data: {"url": url});
+            }else{
+              ScaffoldMessenger.of(context).showSnackBar(AppSnackBar.popMessage("missing_url"));
             }
           },
           child: Text(LocalizationService.translate("confirm"),

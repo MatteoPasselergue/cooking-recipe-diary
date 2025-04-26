@@ -1,0 +1,115 @@
+{
+  "language_name": "Italiano",
+
+  "add_category": "Aggiungi categoria",
+  "edit_category": "Modifica categoria",
+  "cancel": "Annulla",
+  "name_category": "Nome categoria",
+  "no_category": "Nessuna categoria",
+  "all_categories": "Tutte le ricette",
+  "add": "Aggiungi",
+  "confirm": "Conferma",
+  "delete": "Elimina",
+  "logout": "Disconnetti",
+  "edit": "Modifica",
+  "no_recipes_found": "Nessuna ricetta trovata",
+  "lang": "Lingua",
+  "search_recipes": "Cerca ricette",
+  "filter_by_category": "Filtra per categoria",
+
+  "choose_profile": "Scegli profilo",
+  "add_profile": "Crea profilo",
+  "edit_profile": "Modifica profilo",
+  "delete_profile": "Elimina profilo",
+  "username": "Nome utente",
+  "remove_image": "Rimuovi immagine",
+
+  "edit_tag": "Modifica tag",
+  "add_tag": "Aggiungi tag",
+  "name_tag": "Nome tag",
+
+  "edit_step": "Modifica passaggio",
+  "add_step": "Aggiungi passaggio",
+  "step_content": "Contenuto del passaggio",
+
+  "add_ingredient": "Aggiungi ingrediente",
+  "edit_ingredient": "Modifica ingrediente",
+  "ingredient_name": "Ingrediente",
+  "ingredient_quantity": "Quantità",
+  "ingredient_unit": "Unità",
+  "note": "Scrivi una nota...",
+
+  "confirm_delete_title_recipe": "Elimina ricetta definitivamente",
+  "confirm_delete_message_recipe": "Questa azione è irreversibile. Sei sicuro di voler eliminare questa ricetta ?",
+
+  "confirm_no_save_modification_title": "Annullare le modifiche ?",
+  "confirm_no_save_modification_message": "Hai modifiche non salvate. Sei sicuro di voler uscire ?",
+
+  "confirm_logout_title": "Disconnetti profilo",
+  "confirm_logout_message": "Sei sicuro di voler effettuare il logout ?",
+  "confirm_delete_title": "Elimina profilo definitivamente",
+  "confirm_delete_message": "Questa azione è irreversibile. Sei sicuro di voler eliminare il tuo profilo ?",
+
+  "error_missing_username": "Il campo Nome utente è obbligatorio.",
+
+  "default_recipe_title": "La mia nuova ricetta",
+  "ingredients": "Ingredienti",
+  "steps": "Passaggi",
+
+  "new_recipe_choice": "Crea o importa una ricetta",
+  "create_from_scratch": "Crea ricetta da zero",
+  "import_from_url": "Importa ricetta da URL",
+  "enter_recipe_url": "Inserisci URL della ricetta",
+  "imported_from": "Importata da ",
+
+  "created_by": "Creata da",
+  "unknown_user": "Sconosciuto",
+
+  "total_time": "Tempo totale",
+  "prep_time": "Tempo di preparazione",
+  "rest_time": "Tempo di riposo",
+  "cook_time": "Tempo di cottura",
+  "servings": "Numero di persone / Numero di pezzi",
+  "recipe_name_cant_be_empty": "Il nome della ricetta non può essere vuoto.",
+  "category_name_cant_be_empty": "Il nome della categoria non può essere vuoto.",
+  "tag_cant_be_empty": "Il tag non può essere vuoto.",
+  "step_cant_be_empty": "Il contenuto del passaggio non può essere vuoto.",
+  "ingredient_cant_be_empty": "Il campo Ingrediente non può essere vuoto.",
+
+  "be_patient_message": "Attendere prego...",
+  "importation_waiting_message": "L'importazione di una ricetta può richiedere fino a 30 secondi.",
+  "add_recipe_waiting_message": "Aggiunta della ricetta in corso...",
+  "edit_recipe_waiting_message": "Modifica della ricetta in corso...",
+  "remove_recipe_waiting_message": "Rimozione della ricetta in corso...",
+  "add_user_waiting_message": "Aggiunta utente in corso...",
+  "save_profile_waiting_message": "Salvataggio profilo in corso...",
+  "edit_user_waiting_message": "Modifica utente in corso...",
+  "add_category_waiting_message": "Aggiunta categoria in corso...",
+  "remove_category_waiting_message": "Rimozione categoria in corso...",
+  "edit_category_waiting_message": "Modifica categoria in corso...",
+
+  "general_message_error": "Si è verificato un errore, riprova.",
+  "no_recipe_page_found": "Nessuna ricetta trovata in questa pagina !",
+  "missing_url": "URL mancante.",
+  "failed_to_upload_image": "Caricamento immagine fallito.",
+
+  "failed_to_fetch_recipes": "Recupero ricette fallito.",
+  "failed_to_fetch_categories": "Recupero categorie fallito.",
+  "failed_to_fetch_tags": "Recupero tag fallito.",
+  "failed_to_fetch_users": "Recupero utenti fallito.",
+
+  "failed_to_create_recipe": "Creazione ricetta fallita.",
+  "failed_to_create_category": "Creazione categoria fallita.",
+  "failed_to_create_tag": "Creazione tag fallita.",
+  "failed_to_create_user": "Creazione utente fallita.",
+
+  "failed_to_update_category": "Aggiornamento categoria fallito.",
+  "failed_to_update_recipe": "Aggiornamento ricetta fallito.",
+  "failed_to_update_tag": "Aggiornamento tag fallito.",
+  "failed_to_update_user": "Aggiornamento utente fallito.",
+
+  "recipe_not_found": "Ricetta non trovata.",
+  "image_not_found": "Immagine non trovata.",
+  "tag_not_found": "Tag non trovato.",
+  "category_not_found": "Categoria non trovata."
+}

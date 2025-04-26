@@ -1,7 +1,6 @@
 {
   "language_name": "Français",
 
-
   "add_category": "Ajouter une catégorie",
   "edit_category": "Modifier la catégorie",
   "cancel": "Annuler",
@@ -76,7 +75,6 @@
   "tag_cant_be_empty": "Le tag ne peut pas être vide.",
   "step_cant_be_empty": "Une étape de recette ne peut pas être vide.",
   "ingredient_cant_be_empty": "Le champ 'Ingrédient' ne peut pas être vide.",
-
 
   "be_patient_message": "Veuillez patienter quelques instants...",
   "importation_waiting_message": "L'importation d'une recette peut prendre jusqu'à 30 secondes.",
