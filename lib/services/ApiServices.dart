@@ -11,7 +11,6 @@ class ApiService {
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      print(response.body);
       return json.decode(response.body);
     } else {
       final error = jsonDecode(response.body);

@@ -10,6 +10,7 @@ import '../providers/RecipeProvider.dart';
 import '../services/LocalizationService.dart';
 import '../utils/AppConfig.dart';
 import '../utils/utils.dart';
+import '../widgets/buttons/ActionIconButton.dart';
 import '../widgets/buttons/TagButton.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -92,15 +93,23 @@ class _SearchScreenState extends State<SearchScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: TextField(
-          decoration: InputDecoration(
-            hintText: LocalizationService.translate("search_recipes"),
-            prefixIcon: const Icon(Icons.search),
-          ),
-          onChanged: (value) {
-            searchQuery = value;
-            _filterRecipes();
-          },
+        title:  Row(
+          children: [
+            ActionIconButton(icon: Icons.arrow_back, factSize: 0.12, page: "back",),
+            const SizedBox(width: 8),
+            Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: LocalizationService.translate("search_recipes"),
+                  prefixIcon: const Icon(Icons.search),
+                ),
+                onChanged: (value) {
+                  searchQuery = value;
+                  _filterRecipes();
+                },
+              ),
+            ),
+          ],
         ),
         actions: [
           IconButton(

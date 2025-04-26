@@ -45,6 +45,8 @@ class ActionIconButton extends StatelessWidget {
 
   void _navigate(BuildContext context) async {
     switch(page){
+      case "back":
+        Navigator.pop(context);
       case "profile":
         Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(),),);
         break;

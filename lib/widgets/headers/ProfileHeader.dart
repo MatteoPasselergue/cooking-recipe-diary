@@ -12,6 +12,7 @@ import '../../providers/UserProvider.dart';
 import '../../screens/ProfileSelectionScreen.dart';
 import '../../services/ImageService.dart';
 import '../../utils/AppConfig.dart';
+import '../buttons/ActionIconButton.dart';
 import '../dialogs/LoadingDialog.dart';
 
 
@@ -59,11 +60,20 @@ class _ProfileHeaderState extends State<ProfileHeader> {
     final user = userProvider.profile!;
 
     return Padding(
-      padding: EdgeInsets.only(top: 60, bottom: 30),
+      padding: EdgeInsets.only(top: 20, bottom: 30),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 16),
+                  child: ActionIconButton(icon: Icons.arrow_back, factSize: 0.13, page: "back",),
+                ),
+              ],
+            ),
+            Padding(padding: EdgeInsets.only(top: 20)),
             CircleAvatar(
               radius: 100,
               backgroundColor: AppConfig.backgroundColor,

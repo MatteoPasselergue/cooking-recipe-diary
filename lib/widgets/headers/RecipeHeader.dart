@@ -47,7 +47,8 @@ class RecipeHeader extends StatelessWidget {
               const Padding(padding: EdgeInsets.all(8),),
               Row(
                 children: [
-                  ActionIconButton(factSize: 0.15, icon: Icons.edit, page: null, onTap: editRecipe),
+                  const ActionIconButton(factSize: 0.13, icon: Icons.arrow_back, page: "back"),
+                  ActionIconButton(factSize: 0.13, icon: Icons.edit, page: null, onTap: editRecipe),
                 ],
               ),
             ],

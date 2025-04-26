@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../models/RecipeModel.dart';
 import '../utils/AppConfig.dart';
+import '../widgets/buttons/ActionIconButton.dart';
 
 class CategoryScreen extends StatefulWidget {
   final Category? category;
@@ -82,19 +83,36 @@ class _CategoryScreenState extends State<CategoryScreen> {
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        Utils.iconDataMap[category?.iconName] ?? Icons.book,
-                        size: 30,
+                      ActionIconButton(icon: Icons.arrow_back, page: "back", factSize: 0.12,),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Utils.iconDataMap[category?.iconName] ?? Icons.book,
+                              size: 30,
+                            ),
+                            const SizedBox(width: 8),
+                            Flexible(
+                              child: Text(
+                                category?.name ?? LocalizationService.translate("all_categories"),
+                                style: AppTheme.recipeTitleStyle.copyWith(
+                                  fontSize: 30,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        category?.name ?? LocalizationService.translate("all_categories"),
-                        style: AppTheme.recipeTitleStyle.copyWith(fontSize: 30, overflow: TextOverflow.ellipsis),
-                      ),
+                      const SizedBox(width: 48),
                     ],
                   ),
                 ),

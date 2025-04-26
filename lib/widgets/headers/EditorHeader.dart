@@ -40,6 +40,7 @@ class _EditorHeaderState extends State<EditorHeader> {
   File? _pickedImage;
   List<String> _tags = [];
   List<Category> _categories = [];
+  bool _hasChanged = false;
 
   late int servings;
   late Duration prepTime;
@@ -74,6 +75,7 @@ class _EditorHeaderState extends State<EditorHeader> {
   @override
   void setState(VoidCallback fn) {
     super.setState(fn);
+    _hasChanged = true;
     widget.onChanged();
   }
 
@@ -130,6 +132,7 @@ class _EditorHeaderState extends State<EditorHeader> {
               const Padding(padding: EdgeInsets.all(8),),
               Row(
                 children: [
+                  ActionIconButton(factSize: 0.12, icon: Icons.arrow_back, page: null, onTap: _onWillPop),
                   ActionIconButton(factSize: 0.12, icon: Icons.delete, page: null, onTap: deleteRecipe,),
                   ActionIconButton(factSize: 0.12, icon: Icons.check, page: null, onTap: submitData),
                 ],
@@ -234,6 +237,25 @@ class _EditorHeaderState extends State<EditorHeader> {
     setState(() {
       servings = counter;
     });
+  }
+
+  void _onWillPop() async{
+    if(_hasChanged) {
+      final shouldLeave = await showDialog<bool>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmationDialog(
+            title: LocalizationService.translate(
+                "confirm_no_save_modification_title"),
+            message: LocalizationService.translate(
+                "confirm_no_save_modification_message"),
+          );
+        },
+      );
+      if(shouldLeave == true) Navigator.of(context).pop();
+    }else {
+      Navigator.of(context).pop();
+    }
   }
 
   Widget _buildCategoryItem(int id, List<Category> categories) {
