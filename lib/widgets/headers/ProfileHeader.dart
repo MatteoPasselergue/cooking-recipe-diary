@@ -60,7 +60,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
     final user = userProvider.profile!;
 
     return Padding(
-      padding: EdgeInsets.only(top: 20, bottom: 30),
+      padding: EdgeInsets.only(top: 30, bottom: 30),
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

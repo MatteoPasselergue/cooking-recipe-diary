@@ -21,7 +21,8 @@ class ActionIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double size = MediaQuery.of(context).size.width * factSize;
+    final double baseSize = MediaQuery.of(context).size.shortestSide * factSize;
+    final double size = baseSize.clamp(30.0, 70.0);
 
     return Padding(padding: const EdgeInsets.all(5.0) ,child :InkWell(
       onTap: () {

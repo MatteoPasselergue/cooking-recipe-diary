@@ -9,7 +9,7 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 16, right: 16, top: 30, bottom: 10),
+      padding: EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
       color: AppConfig.primaryColor,
       child: Column(
         children: [
@@ -18,14 +18,14 @@ class HomeHeader extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ActionIconButton(factSize: 0.15, icon: Icons.add, page: "add", onTap: null),
-                  ActionIconButton(factSize: 0.15, icon: Icons.search, page: "search", onTap: null),
+                  ActionIconButton(factSize: 0.14, icon: Icons.add, page: "add", onTap: null),
+                  ActionIconButton(factSize: 0.14, icon: Icons.search, page: "search", onTap: null),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ActionIconButton(factSize: 0.15, icon: Icons.person, page: "profile", onTap: null),
+                  ActionIconButton(factSize: 0.14, icon: Icons.person, page: "profile", onTap: null),
                 ],
               ),
             ],

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/widgets/bodies/HomeBody.dart';
 import 'package:cooking_recipe_diary/widgets/headers/HomeHeader.dart';
@@ -24,32 +26,37 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final headerHeight = screenHeight * 0.8;
+    final screenH     = MediaQuery.of(context).size.height;
+    final screenW     = MediaQuery.of(context).size.width;
+    final shortest    = MediaQuery.of(context).size.shortestSide;
+    final orient      = MediaQuery.of(context).orientation;
+
+    double headerHeight;
+    if (shortest < 600) {
+      headerHeight = (orient == Orientation.portrait)
+          ? screenH * 0.8
+          : screenW * 0.8;
+    } else {
+      headerHeight = (orient == Orientation.portrait)
+          ? screenW * 1.3
+          : screenH * 1.3;
+    }
 
     return Scaffold(
       backgroundColor: AppConfig.primaryColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: headerHeight,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: HomeHeader(),
-              title: const Text(''),
-            ),
-            automaticallyImplyLeading: false,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                height: headerHeight,
+                child: HomeHeader(),
+              ),
+              HomeBody(),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 10,
-              color: Colors.transparent,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: HomeBody(),
-          ),
-        ],
+        ),
       ),
     );
   }
