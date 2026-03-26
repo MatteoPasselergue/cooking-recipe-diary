@@ -19,11 +19,12 @@ class LocalizationService {
   }
 
   static Future<List<Map<String, String>>> getAvailableLocales() async {
-    final manifestContent = await rootBundle.loadString('AssetManifest.json');
-    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+    final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
 
-    final localeFiles = manifestMap.keys
-        .where((String key) => key.startsWith('assets/lang/') && key.endsWith('.json'))
+    final assets = assetManifest.listAssets();
+
+    final localeFiles = assets
+        .where((key) => key.startsWith('assets/lang/') && key.endsWith('.json'))
         .toList();
 
     List<Map<String, String>> locales = [];
