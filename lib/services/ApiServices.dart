@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import '../utils/AppConfig.dart';
+import 'HttpClientService.dart';
 
 class ApiService {
   static final String baseUrl = AppConfig.baseUrl;
@@ -8,7 +11,7 @@ class ApiService {
   // GET
   static Future<List<dynamic>> get(String endpoint) async {
     final url = Uri.parse('$baseUrl/$endpoint');
-    final response = await http.get(url);
+    final response = await HttpClientService.client.get(url);
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -21,7 +24,7 @@ class ApiService {
   // GET SINGLE
   static Future<dynamic> getById(String endpoint, int id) async {
     final url = Uri.parse('$baseUrl/$endpoint/$id');
-    final response = await http.get(url);
+    final response = await HttpClientService.client.get(url);
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -34,7 +37,7 @@ class ApiService {
   // POST
   static Future<dynamic> post(String endpoint, Map<String, dynamic> data) async {
     final url = Uri.parse('$baseUrl/$endpoint');
-    final response = await http.post(
+    final response = await HttpClientService.client.post(
       url,
       headers: {'Content-Type': 'application/json'},
       body: json.encode(data),
@@ -51,7 +54,7 @@ class ApiService {
   // PUT
   static Future<dynamic> put(String endpoint, int id, Map<String, dynamic> data) async {
     final url = Uri.parse('$baseUrl/$endpoint/$id');
-    final response = await http.put(
+    final response = await HttpClientService.client.put(
       url,
       headers: {'Content-Type': 'application/json'},
       body: json.encode(data),
@@ -68,7 +71,7 @@ class ApiService {
   // PATCH
   static Future<dynamic> patch(String endpoint, int id, Map<String, dynamic> data) async {
     final url = Uri.parse('$baseUrl/$endpoint/$id');
-    final response = await http.patch(
+    final response = await HttpClientService.client.patch(
       url,
       headers: {'Content-Type': 'application/json'},
       body: json.encode(data),
@@ -85,7 +88,7 @@ class ApiService {
   // DELETE
   static Future<void> delete(String endpoint, int id) async {
     final url = Uri.parse('$baseUrl/$endpoint/$id');
-    final response = await http.delete(url);
+    final response = await HttpClientService.client.delete(url);
 
     if (response.statusCode != 200 && response.statusCode != 204) {
       final error = jsonDecode(response.body);

@@ -5,6 +5,7 @@ import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
 import 'package:cooking_recipe_diary/providers/UserProvider.dart';
 import 'package:cooking_recipe_diary/screens/HomeScreen.dart';
 import 'package:cooking_recipe_diary/screens/ProfileSelectionScreen.dart';
+import 'package:cooking_recipe_diary/services/ApiServices.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
 import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
@@ -18,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await AppConfig.loadConfig();
+  await ApiService.init();
 
   final prefs = await SharedPreferences.getInstance();
   final profileData = prefs.getString('profile');

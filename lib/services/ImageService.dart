@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import '../utils/AppConfig.dart';
+import 'HttpClientService.dart';
 
 class ImageService {
   static final String baseUrl = AppConfig.baseUrl;
@@ -19,10 +20,9 @@ class ImageService {
   static Future<void> uploadImage(String folder, int id, File imageFile) async {
     final url = Uri.parse('$baseUrl/$folder/image/$id');
     var request = http.MultipartRequest('POST', url);
-
     request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
 
-    final streamedResponse = await request.send();
+    var streamedResponse = await HttpClientService.client.send(request);  // <-- utilisez client.send()
     final response = await http.Response.fromStream(streamedResponse);
 
     if (response.statusCode != 200) {
