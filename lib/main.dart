@@ -5,7 +5,10 @@ import 'package:cooking_recipe_diary/providers/RecipeProvider.dart';
 import 'package:cooking_recipe_diary/providers/UserProvider.dart';
 import 'package:cooking_recipe_diary/screens/HomeScreen.dart';
 import 'package:cooking_recipe_diary/screens/ProfileSelectionScreen.dart';
+import 'package:cooking_recipe_diary/screens/UpdateScreen.dart';
 import 'package:cooking_recipe_diary/services/ApiServices.dart';
+import 'package:cooking_recipe_diary/services/HttpClientService.dart';
+import 'package:cooking_recipe_diary/services/VersionService.dart';
 import 'package:cooking_recipe_diary/utils/AppConfig.dart';
 import 'package:cooking_recipe_diary/utils/theme.dart';
 import 'package:cooking_recipe_diary/widgets/icons/SpinningIcon.dart';
@@ -18,13 +21,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  HttpOverrides.global = MyHttpOverrides();
+
   await AppConfig.loadConfig();
-  await ApiService.init();
 
   final prefs = await SharedPreferences.getInstance();
   final profileData = prefs.getString('profile');
 
   await AppConfig.loadConfig();
+  await HttpClientService.init();
+
   runApp(MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => RecipeProvider()),
@@ -35,6 +41,14 @@ void main() async {
         child: MyApp(profileData: profileData),
       ),
   );
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -93,6 +107,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   Future<void> _initialize() async {
     await _checkPermissions();
     await _checkInternet();
+    await _checkVersion();
     if (mounted) {
       setState(() {
         _ready = true;
@@ -131,6 +146,20 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             .showSnackBar(AppSnackBar.popMessage("no_connection"));
       }
       await Future.delayed(const Duration(seconds: 2));
+    }
+  }
+
+  Future<void> _checkVersion() async {
+    final currentVersion = await VersionService.getCurrentVersion();
+    final latest = await VersionService.fetchLatestVersionInfo();
+
+    if (latest != null && VersionService.isNewVersionAvailable(currentVersion, latest["latestVersion"])) {
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => UpdateScreen(latestVersion: latest["latestVersion"], downloadUrl: latest["downloadUrl"], releaseNotes: latest["releaseNotes"])),
+      );
+
+      return;
     }
   }
 
